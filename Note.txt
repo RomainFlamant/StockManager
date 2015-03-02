@@ -1,0 +1,13 @@
+Gestion des stocks
+
+Table =
+
+Produit  1,N
+         0,N  SousCategorie   1,1
+                              1,N   Categorie
+                              
+Utilisateur   1,N
+              0,N    Rôle
+              
+
+                              
