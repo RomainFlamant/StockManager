@@ -9,5 +9,29 @@ Produit  1,N
 Utilisateur   1,N
               0,N    Rôle
               
+              
+Contexte : Société d'import export
+
+Produit -> categorie
+Client -> Pro
+       -> Particulier
+Fournisseur
+Employés --> utilisateur de l'application
+Commande
+FactureSupplier
+
+
+Objectif : outils qui gere ses stock
+commande et fournisseur
+des qu'un produit atteint un stock limite  declencher une alerte
+produit supérieur à une certain quantité __> alert
+nbr de comande
+chiffre d'affaire par catégorie et produit
+facture client et facture fournisseur.
+
+contrainte : 
+hibernate SpringMVC
+
+              
 
                               
