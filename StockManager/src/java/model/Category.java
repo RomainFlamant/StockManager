@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,29 +21,34 @@ import javax.persistence.Table;
 public class Category extends Metier implements java.io.Serializable {
 
 
-     private Long idCategory;
+     private long idCategory;
      private String nameCategory;
      private String descriptionCategory;
-     private Set products = new HashSet(0);
+     private Set<Product> products = new HashSet(0);
 
     public Category() {
     }
 
-    public Category(String nameCategory, String descriptionCategory, Set products) {
+	
+    public Category(long idCategory) {
+        this.idCategory = idCategory;
+    }
+    public Category(long idCategory, String nameCategory, String descriptionCategory, Set<Product> products) {
+       this.idCategory = idCategory;
        this.nameCategory = nameCategory;
        this.descriptionCategory = descriptionCategory;
        this.products = products;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="IdCategory", unique=true, nullable=false)
-    public Long getIdCategory() {
+    public long getIdCategory() {
         return this.idCategory;
     }
     
-    public void setIdCategory(Long idCategory) {
+    public void setIdCategory(long idCategory) {
         this.idCategory = idCategory;
     }
 
@@ -70,11 +73,11 @@ public class Category extends Metier implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="category")
-    public Set getProducts() {
+    public Set<Product> getProducts() {
         return this.products;
     }
     
-    public void setProducts(Set products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 

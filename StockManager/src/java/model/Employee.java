@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,33 +21,40 @@ import javax.persistence.Table;
 public class Employee extends Metier implements java.io.Serializable {
 
 
-     private Long idEmployee;
+     private long idEmployee;
      private String nameEmployee;
      private String firstNameEmployee;
      private String emailEmployee;
      private String mdpEmployee;
-     private Set orderses = new HashSet(0);
+     private Integer isActive;
+     private Set<Orders> orderses = new HashSet(0);
 
     public Employee() {
     }
 
-    public Employee(String nameEmployee, String firstNameEmployee, String emailEmployee, String mdpEmployee, Set orderses) {
+	
+    public Employee(long idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+    public Employee(long idEmployee, String nameEmployee, String firstNameEmployee, String emailEmployee, String mdpEmployee, Integer isActive, Set<Orders> orderses) {
+       this.idEmployee = idEmployee;
        this.nameEmployee = nameEmployee;
        this.firstNameEmployee = firstNameEmployee;
        this.emailEmployee = emailEmployee;
        this.mdpEmployee = mdpEmployee;
+       this.isActive = isActive;
        this.orderses = orderses;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="IdEmployee", unique=true, nullable=false)
-    public Long getIdEmployee() {
+    public long getIdEmployee() {
         return this.idEmployee;
     }
     
-    public void setIdEmployee(Long idEmployee) {
+    public void setIdEmployee(long idEmployee) {
         this.idEmployee = idEmployee;
     }
 
@@ -93,12 +98,22 @@ public class Employee extends Metier implements java.io.Serializable {
         this.mdpEmployee = mdpEmployee;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
-    public Set getOrderses() {
+    
+    @Column(name="IsActive")
+    public Integer getIsActive() {
+        return this.isActive;
+    }
+    
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
+    }
+
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
+    public Set<Orders> getOrderses() {
         return this.orderses;
     }
     
-    public void setOrderses(Set orderses) {
+    public void setOrderses(Set<Orders> orderses) {
         this.orderses = orderses;
     }
 

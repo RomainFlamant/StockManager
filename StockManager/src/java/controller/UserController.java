@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.DaoEmployee;
 import dao.DaoGeneric;
 import factory.FactoryDao;
 import model.Employee;
@@ -25,6 +26,14 @@ public class UserController {
     @RequestMapping("/login")
     public String login() {
         return "login";
+    }
+    
+    @RequestMapping("/AllEmployee")
+    public String allEmployee(Model m) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        dao.selectAll("Employee");
+        m.addAttribute("myList", dao.selectAll("Employee"));
+        return "listEmployee";
     }
 
     @RequestMapping(value = "/inscription", method = RequestMethod.GET)

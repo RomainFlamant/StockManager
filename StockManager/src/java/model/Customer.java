@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,19 +21,24 @@ import javax.persistence.Table;
 public class Customer extends Metier implements java.io.Serializable {
 
 
-     private Long idCustomer;
+     private long idCustomer;
      private Long nameCustomer;
      private String siretCustomer;
      private String typeCustomer;
      private String adressCustomer;
      private String villeCustomer;
      private Long cpcustomer;
-     private Set orderses = new HashSet(0);
+     private Set<Orders> orderses = new HashSet(0);
 
     public Customer() {
     }
 
-    public Customer(Long nameCustomer, String siretCustomer, String typeCustomer, String adressCustomer, String villeCustomer, Long cpcustomer, Set orderses) {
+	
+    public Customer(long idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+    public Customer(long idCustomer, Long nameCustomer, String siretCustomer, String typeCustomer, String adressCustomer, String villeCustomer, Long cpcustomer, Set<Orders> orderses) {
+       this.idCustomer = idCustomer;
        this.nameCustomer = nameCustomer;
        this.siretCustomer = siretCustomer;
        this.typeCustomer = typeCustomer;
@@ -45,15 +48,15 @@ public class Customer extends Metier implements java.io.Serializable {
        this.orderses = orderses;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="IdCustomer", unique=true, nullable=false)
-    public Long getIdCustomer() {
+    public long getIdCustomer() {
         return this.idCustomer;
     }
     
-    public void setIdCustomer(Long idCustomer) {
+    public void setIdCustomer(long idCustomer) {
         this.idCustomer = idCustomer;
     }
 
@@ -118,11 +121,11 @@ public class Customer extends Metier implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
-    public Set getOrderses() {
+    public Set<Orders> getOrderses() {
         return this.orderses;
     }
     
-    public void setOrderses(Set orderses) {
+    public void setOrderses(Set<Orders> orderses) {
         this.orderses = orderses;
     }
 

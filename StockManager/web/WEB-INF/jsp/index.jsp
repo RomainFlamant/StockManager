@@ -1,19 +1,85 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<%@include file="includes/header.jsp" %>
+<%@include file="includes/menu.jsp" %>
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
-    </head>
+<!-- start: Content -->
+<div id="content" class="span10">		
+    <ul class="breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <a href="index.html">Site</a> 
+            <i class="icon-angle-right"></i>
+        </li>
+        <li><a href="#">Accueil</a></li>
+    </ul>
+    <div class="row-fluid">	
 
-    <body>
-        <p>Hello! This is the default welcome page for a Spring Web MVC project.</p>
-        <p><i>To display a different welcome page for this project, modify</i>
-            <tt>index.jsp</tt> <i>, or create your own welcome page then change
-                the redirection in</i> <tt>redirect.jsp</tt> <i>to point to the new
-                welcome page and also update the welcome-file setting in</i>
-            <tt>web.xml</tt>.</p>
-    </body>
-</html>
+				<a class="quick-button metro yellow span2">
+					<i class="icon-credit-card"></i>
+					<p>Clients</p>
+					<span class="badge">237</span>
+				</a>
+				<a class="quick-button metro red span2">
+					<i class="icon-truck"></i>
+					<p>Facture ce mois</p>
+					<span class="badge">46</span>
+				</a>
+				<a class="quick-button metro blue span2">
+					<i class="icon-shopping-cart"></i>
+					<p>Commande ce mois</p>
+					<span class="badge">13</span>
+				</a>
+				<a class="quick-button metro green span2">
+					<i class="icon-retweet"></i>
+					<p>Produit hors stock</p>
+                                        <span class="badge">11</span>
+				</a>
+				<a class="quick-button metro pink span2">
+					<i class="icon-eye-close"></i>
+					<p>Produit en surplu</p>
+					<span class="badge">88</span>
+				</a>
+				<a class="quick-button metro black span2">
+					<i class="icon-money"></i>
+					<p>Chiffre d'affaire</p>
+                                        <span class="badge">14 M€</span>
+				</a>
+				
+				<div class="clearfix"></div>
+								
+			</div><!--/row-->
+                        <br>
+                        
+			
+       
+
+	</div><!--/.fluid-container-->
+	
+			<!-- end: Content -->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+		
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Settings</h3>
+		</div>
+		<div class="modal-body">
+			<p>Here settings can be configured...</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+	
+	<div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<ul class="list-inline item-details">
+				<li><a href="http://themifycloud.com">Admin templates</a></li>
+				<li><a href="http://themescloud.org">Bootstrap themes</a></li>
+			</ul>
+		</div>
+	</div>
+
+<%@include file="includes/footer.jsp" %>

@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,18 +21,23 @@ import javax.persistence.Table;
 public class Supplier extends Metier implements java.io.Serializable {
 
 
-     private Long idSupplier;
+     private long idSupplier;
      private String nameSupplier;
      private String siretSupplier;
      private String addressSupplier;
      private String villeSupplier;
      private Long cpsupplier;
-     private Set invoices = new HashSet(0);
+     private Set<Invoice> invoices = new HashSet(0);
 
     public Supplier() {
     }
 
-    public Supplier(String nameSupplier, String siretSupplier, String addressSupplier, String villeSupplier, Long cpsupplier, Set invoices) {
+	
+    public Supplier(long idSupplier) {
+        this.idSupplier = idSupplier;
+    }
+    public Supplier(long idSupplier, String nameSupplier, String siretSupplier, String addressSupplier, String villeSupplier, Long cpsupplier, Set<Invoice> invoices) {
+       this.idSupplier = idSupplier;
        this.nameSupplier = nameSupplier;
        this.siretSupplier = siretSupplier;
        this.addressSupplier = addressSupplier;
@@ -43,15 +46,15 @@ public class Supplier extends Metier implements java.io.Serializable {
        this.invoices = invoices;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="IdSupplier", unique=true, nullable=false)
-    public Long getIdSupplier() {
+    public long getIdSupplier() {
         return this.idSupplier;
     }
     
-    public void setIdSupplier(Long idSupplier) {
+    public void setIdSupplier(long idSupplier) {
         this.idSupplier = idSupplier;
     }
 
@@ -106,11 +109,11 @@ public class Supplier extends Metier implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="supplier")
-    public Set getInvoices() {
+    public Set<Invoice> getInvoices() {
         return this.invoices;
     }
     
-    public void setInvoices(Set invoices) {
+    public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
     }
 

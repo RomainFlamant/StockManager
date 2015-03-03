@@ -5,6 +5,7 @@
  */
 package dao;
 
+import hibernate.HibernateUtil;
 import model.Employee;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +23,7 @@ public class DaoEmployee extends DaoGeneric<Employee>
     
     public Employee connection (Employee emp){
         
-        Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSession();
         String sql = "FROM Clients WHERE EMail = :email AND mdp = :mdp";
         Query query  = session.createQuery(sql);
         query.setString(":email", emp.getEmailEmployee());

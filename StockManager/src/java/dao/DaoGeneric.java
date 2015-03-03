@@ -6,43 +6,73 @@
 package dao;
 
 
+import hibernate.HibernateUtil;
 import java.util.List;
 import model.Metier;
-import org.hibernate.FlushMode;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author userinsta
  * @param <T>
  */
-public abstract class DaoGeneric<T extends Metier> extends HibernateDaoSupport{
+public abstract class DaoGeneric<T extends Metier> {
 
-    
+    private Session session;
     public DaoGeneric() {
-        super();
+        this.session = HibernateUtil.getSession();
     }
+    
+    
 
     public void insert(Metier objet) {
-        getHibernateTemplate().getSessionFactory().openSession();
-        getHibernateTemplate().getSessionFactory().openStatelessSession();
-        getHibernateTemplate().getSessionFactory().getCurrentSession().beginTransaction();
-        getHibernateTemplate().save(objet);
-        getHibernateTemplate().getSessionFactory().getCurrentSession().getTransaction().commit();
+        session = HibernateUtil.getSession();
+        Transaction trx = session.beginTransaction();
+        try {
+            session.save(objet);
+            trx.commit();
+
+        } catch (HibernateException ex) {
+            trx.rollback();
+        }
     }
 
     public void update(Metier objet) {
-        getHibernateTemplate().getSessionFactory().openSession().setFlushMode(FlushMode.AUTO);
-        getHibernateTemplate().update(objet);
+        session = HibernateUtil.getSession();
+        Transaction trx = session.beginTransaction();
+
+        try {
+            session.update(objet);
+            trx.commit();
+        } catch (HibernateException ex) {
+            trx.rollback();
+        }
     }
 
     public void delete(Metier objet) {
-        getHibernateTemplate().getSessionFactory().openSession().setFlushMode(FlushMode.AUTO);
-        getHibernateTemplate().delete(objet);
+        session = HibernateUtil.getSession();
+        Transaction trx = session.beginTransaction();
+
+        try {
+            session.delete(objet);
+            trx.commit();
+        } catch (HibernateException ex) {
+            trx.rollback();
+        }
     }
 
-    public List<Metier> selectAll(Class obj) {
-        return getHibernateTemplate().loadAll(obj);
+    public List<Metier> selectAll(String metier) {
+        session = HibernateUtil.getSession();
+
+        Query q = session.createQuery("From " + metier);
+        List<Metier> l = q.list();
+        session.close();
+        return l;
+        
+
     }
     
 }

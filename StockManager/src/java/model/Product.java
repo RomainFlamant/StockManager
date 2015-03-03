@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,7 +23,7 @@ import javax.persistence.Table;
 public class Product extends Metier implements java.io.Serializable {
 
 
-     private Long idProduct;
+     private long idProduct;
      private Category category;
      private String nameProduct;
      private String descriptifProduct;
@@ -33,17 +31,19 @@ public class Product extends Metier implements java.io.Serializable {
      private Integer maxStockProduct;
      private Integer minStockProduct;
      private Integer stockProduct;
-     private Set orderses = new HashSet(0);
-     private Set invoices = new HashSet(0);
+     private Set<Orders> orderses = new HashSet(0);
+     private Set<Invoice> invoices = new HashSet(0);
 
     public Product() {
     }
 
 	
-    public Product(Category category) {
+    public Product(long idProduct, Category category) {
+        this.idProduct = idProduct;
         this.category = category;
     }
-    public Product(Category category, String nameProduct, String descriptifProduct, Float priceProduct, Integer maxStockProduct, Integer minStockProduct, Integer stockProduct, Set orderses, Set invoices) {
+    public Product(long idProduct, Category category, String nameProduct, String descriptifProduct, Float priceProduct, Integer maxStockProduct, Integer minStockProduct, Integer stockProduct, Set<Orders> orderses, Set<Invoice> invoices) {
+       this.idProduct = idProduct;
        this.category = category;
        this.nameProduct = nameProduct;
        this.descriptifProduct = descriptifProduct;
@@ -55,15 +55,15 @@ public class Product extends Metier implements java.io.Serializable {
        this.invoices = invoices;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="IdProduct", unique=true, nullable=false)
-    public Long getIdProduct() {
+    public long getIdProduct() {
         return this.idProduct;
     }
     
-    public void setIdProduct(Long idProduct) {
+    public void setIdProduct(long idProduct) {
         this.idProduct = idProduct;
     }
 
@@ -138,20 +138,20 @@ public class Product extends Metier implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="product")
-    public Set getOrderses() {
+    public Set<Orders> getOrderses() {
         return this.orderses;
     }
     
-    public void setOrderses(Set orderses) {
+    public void setOrderses(Set<Orders> orderses) {
         this.orderses = orderses;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="product")
-    public Set getInvoices() {
+    public Set<Invoice> getInvoices() {
         return this.invoices;
     }
     
-    public void setInvoices(Set invoices) {
+    public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
     }
 
