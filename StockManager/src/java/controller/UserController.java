@@ -23,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //@RequestMapping(value = {"/user", "/admin"})
 public class UserController {
 
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
+    @RequestMapping(value="/login",method=RequestMethod.GET)
+    public String login(Model model) {
+        model.addAttribute("user", new Employee());
+        return "login"; 
     }
     
     @RequestMapping("/AllEmployee")
@@ -36,6 +37,13 @@ public class UserController {
         return "listEmployee";
     }
 
+     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute(value = "user") Employee user) {
+        DaoEmployee dao = (DaoEmployee)FactoryDao.getDao(Employee.class);
+        dao.connection(user);
+        return "index";
+    }
+    
     @RequestMapping(value = "/inscription", method = RequestMethod.GET)
     public String inscription(Model model) {
 
@@ -48,7 +56,6 @@ public class UserController {
         DaoGeneric dao = FactoryDao.getDao(Employee.class);
         dao.insert(user);
         return "index";
-
     }
     
     
