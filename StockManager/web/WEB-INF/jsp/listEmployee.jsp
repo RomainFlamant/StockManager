@@ -14,7 +14,7 @@
 			<ul class="breadcrumb">
         <li>
             <i class="icon-home"></i>
-            <a href="index.html">Site</a> 
+            <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
         <li><a href="#">Liste des Employés</a></li>
@@ -24,24 +24,34 @@
     <table class="table table-striped table-bordered bootstrap-datatable datatable">
               <thead>
                       <tr>
-                              <th>Username</th>
-                              <th>Date registered</th>
-                              <th>Role</th>
+                              <th>Nom</th>
+                              <th>Prénom</th>
+                              <th>email</th>
                               <th>Status</th>
                               <th>Actions</th>
                       </tr>
               </thead>   
               <tbody>
+                  <c:if test="${myList.isEmpty()}">
+                      <tr>
+                          <td colspan="5">Aucun resultat trouvé</td>
+                    </tr>
+                  </c:if>
                   <c:forEach items="${myList}" var="element"> 
                     <tr>
                     <td>${element.nameEmployee}</td>
-                        <td class="center">${element.nameEmployee}</td>
-                        <td class="center">${element.nameEmployee}</td>
+                        <td class="center">${element.firstNameEmployee}</td>
+                        <td class="center">${element.emailEmployee}</td>
                         <td class="center">
-                                <span class="label label-success">${element.nameEmployee}</span>
+                            <c:if test="${element.isActive == 1}" >
+                                <span class="label label-success">Actif</span>
+                            </c:if>
+                            <c:if test="${element.isActive == 0}">
+                                <span class="label label-warning">Désactive</span>
+                            </c:if>    
                         </td>
                         <td class="center">
-                                <a class="btn btn-success" href="#">
+                                <a class="btn btn-success" href="SupEmployee.stk?id=${element.idEmployee}">
                                         <i class="halflings-icon white zoom-in"></i>  
                                 </a>
                                 <a class="btn btn-info" href="#">
@@ -53,25 +63,6 @@
                         </td>
                     </tr>
                   </c:forEach>
-                    <tr>
-                            <td>Dennis Ji</td>
-                            <td class="center">2012/01/01</td>
-                            <td class="center">Member</td>
-                            <td class="center">
-                                    <span class="label label-success">Active</span>
-                            </td>
-                            <td class="center">
-                                    <a class="btn btn-success" href="#">
-                                            <i class="halflings-icon white zoom-in"></i>  
-                                    </a>
-                                    <a class="btn btn-info" href="#">
-                                            <i class="halflings-icon white edit"></i>  
-                                    </a>
-                                    <a class="btn btn-danger" href="#">
-                                            <i class="halflings-icon white trash"></i> 
-                                    </a>
-                            </td>
-                    </tr>
               </tbody>
       </table>            		
 </div><!--/row-->

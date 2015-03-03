@@ -8,12 +8,16 @@ package controller;
 import dao.DaoEmployee;
 import dao.DaoGeneric;
 import factory.FactoryDao;
+import java.util.List;
 import model.Employee;
+import model.Metier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -28,35 +32,67 @@ public class UserController {
         model.addAttribute("user", new Employee());
         return "login"; 
     }
-    
-    @RequestMapping("/AllEmployee")
-    public String allEmployee(Model m) {
-        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
-        dao.selectAll("Employee");
-        m.addAttribute("myList", dao.selectAll("Employee"));
-        return "listEmployee";
-    }
 
-     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@ModelAttribute(value = "user") Employee user) {
         DaoEmployee dao = (DaoEmployee)FactoryDao.getDao(Employee.class);
         dao.connection(user);
         return "index";
     }
     
-    @RequestMapping(value = "/inscription", method = RequestMethod.GET)
-    public String inscription(Model model) {
-
-        model.addAttribute("user", new Employee());
-        return "inscription";
+    /////////////////////////////////////////
+    //LISTE DES EMPLOYEES
+    @RequestMapping("/AllEmployee")
+    public String allEmployee(Model m) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        List<Metier> l = dao.selectAll("Employee");
+        m.addAttribute("myList", l);
+        return "listEmployee";
     }
-
-    @RequestMapping(value = "/inscription", method = RequestMethod.POST)
-    public String inscription(@ModelAttribute(value = "user") Employee user) {
-        DaoGeneric dao = FactoryDao.getDao(Employee.class);
-        dao.insert(user);
-        return "index";
+    //
+    /////////////////////////////////////////
+    
+    /////////////////////////////////////////
+    //AJOUT EMPLOYEE
+    //
+    @RequestMapping(value = "/AddEmployee",method=RequestMethod.GET)
+    public String addEmployee(Model m) {
+        m.addAttribute("employee", new Employee());
+        return "addEmployee";
     }
     
+    @RequestMapping(value = "/AddEmployee",method=RequestMethod.POST)
+    public String addEmployeeToDB(Employee emp, Model m) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        emp.setIsActive(1);
+        dao.insert(emp);
+        m.addAttribute("ResultForm","success");
+        m.addAttribute("employee", new Employee());
+        return "addEmployee";
+    }
+    //
+    /////////////////////////////////////////
     
+    /////////////////////////////////////////
+    //DELETE EMPLOYEE
+    //
+    @RequestMapping(value = "/SupEmployee",method=RequestMethod.GET)
+    public String supEmployee(@RequestParam("id") Long id,Model m) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        Employee emp = dao.getEmployeeWithId(id);
+        m.addAttribute("employee", emp);
+        return "deleteEmployee";
+    }
+    
+    @RequestMapping(value = "/SupEmployee",method=RequestMethod.POST)
+    public String supEmployeeToDB(Employee emp, Model m) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        emp.setIsActive(0);
+        dao.update(emp);
+        m.addAttribute("ResultForm","success");
+        m.addAttribute("employee", emp);
+        return "redirect:/AllEmployee.stk";
+    }
+    //
+    /////////////////////////////////////////
 }

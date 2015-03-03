@@ -34,4 +34,10 @@ public class DaoEmployee extends DaoGeneric<Employee>
          return employe;
         
     }
+
+    public Employee getEmployeeWithId(Long id) {
+        Session session = HibernateUtil.getSession();
+        Employee emp = (Employee) session.load(Employee.class, id);
+        return emp;
+    }
 }

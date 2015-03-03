@@ -50,6 +50,7 @@ public abstract class DaoGeneric<T extends Metier> {
         } catch (HibernateException ex) {
             trx.rollback();
         }
+        session.close();
     }
 
     public void delete(Metier objet) {
