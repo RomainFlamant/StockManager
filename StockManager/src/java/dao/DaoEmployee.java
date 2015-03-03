@@ -24,10 +24,10 @@ public class DaoEmployee extends DaoGeneric<Employee>
     public Employee connection (Employee emp){
         
         Session session = HibernateUtil.getSession();
-        String sql = "FROM Clients WHERE EMail = :email AND mdp = :mdp";
+        String sql = "FROM  Employee WHERE emailEmployee = ? AND mdpEmployee = ?";
         Query query  = session.createQuery(sql);
-        query.setString(":email", emp.getEmailEmployee());
-        query.setString(":mdp", emp.getMdpEmployee());
+        query.setString(0, emp.getEmailEmployee());
+        query.setString(1, emp.getMdpEmployee());
         
          Employee employe = (Employee) query.uniqueResult();
         

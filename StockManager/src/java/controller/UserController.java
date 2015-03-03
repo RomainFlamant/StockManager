@@ -8,12 +8,15 @@ package controller;
 import dao.DaoEmployee;
 import dao.DaoGeneric;
 import factory.FactoryDao;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import model.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.portlet.ModelAndView;
 
 /**
  *
@@ -23,12 +26,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //@RequestMapping(value = {"/user", "/admin"})
 public class UserController {
 
-    @RequestMapping(value="/login",method=RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("user", new Employee());
-        return "login"; 
+        return "login";
     }
-    
+
+   @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute(value = "user") Employee user,HttpSession session) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        Employee employe = dao.connection(user);
+        if (employe != null) {
+            session.setAttribute("userConnecte", employe);
+            return "index";
+        } else {
+            return "login";
+        }
+
+    }
+ 
     @RequestMapping("/AllEmployee")
     public String allEmployee(Model m) {
         DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
@@ -37,13 +53,6 @@ public class UserController {
         return "listEmployee";
     }
 
-     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute(value = "user") Employee user) {
-        DaoEmployee dao = (DaoEmployee)FactoryDao.getDao(Employee.class);
-        dao.connection(user);
-        return "index";
-    }
-    
     @RequestMapping(value = "/inscription", method = RequestMethod.GET)
     public String inscription(Model model) {
 
@@ -57,6 +66,5 @@ public class UserController {
         dao.insert(user);
         return "index";
     }
-    
-    
+
 }

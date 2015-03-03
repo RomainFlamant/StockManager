@@ -7,10 +7,10 @@
     <ul class="breadcrumb">
         <li>
             <i class="icon-home"></i>
-            <a href="index.html">Site</a> 
+            <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Accueil</a></li>
+        <li><a href="index.stk">Accueil</a></li>
     </ul>
     <div class="row-fluid">	
 
