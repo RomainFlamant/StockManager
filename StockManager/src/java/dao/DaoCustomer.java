@@ -6,8 +6,6 @@
 package dao;
 
 import model.Customer;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 /**
  *

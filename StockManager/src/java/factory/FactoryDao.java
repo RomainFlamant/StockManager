@@ -8,9 +8,6 @@ package factory;
 import dao.DaoGeneric;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 /**
  *
@@ -18,32 +15,19 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
  */
 public class FactoryDao {
     
-    private HibernateTemplate hibernateTemplate;
-    
-    public DaoGeneric<?> getDao(Class classe) {
+    public static DaoGeneric<?> getDao(Class classe){
         
-        DaoGeneric<?> dao = null;
+        DaoGeneric<?> dao = null ;
         try {
-            String daoString = "dao.Dao" + classe.getSimpleName();
-            Class classeDao = Class.forName(daoString);
+            String daoString = "dao.Dao"+classe.getSimpleName();
+           Class classeDao = Class.forName(daoString);
             
-            dao = (DaoGeneric<?>) classeDao.newInstance();
-            dao.setHibernateTemplate(hibernateTemplate);
+          dao = (DaoGeneric<?>) classeDao.newInstance();
+            
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(FactoryDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dao;
-    }
-    
-    public FactoryDao() {
-    }
-    
-    public HibernateTemplate getHibernateTemplate() {
-        return hibernateTemplate;
-    }
-    
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
-    }
+   }
     
 }

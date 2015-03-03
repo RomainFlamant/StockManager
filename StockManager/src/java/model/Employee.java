@@ -1,5 +1,5 @@
 package model;
-// Generated 2 mars 2015 20:31:41 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="employee"
     ,catalog="stockmanager"
 )
-public class Employee  extends Metier  implements java.io.Serializable {
+public class Employee extends Metier implements java.io.Serializable {
 
 
      private Long idEmployee;

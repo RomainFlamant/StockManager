@@ -1,5 +1,5 @@
 package model;
-// Generated 2 mars 2015 20:31:41 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.AttributeOverride;
@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="orders"
     ,catalog="stockmanager"
 )
-public class Orders  extends Metier  implements java.io.Serializable {
+public class Orders extends Metier implements java.io.Serializable {
 
 
      private OrdersId id;

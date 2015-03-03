@@ -9,46 +9,4 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <bean id="propertyConfigurer"
-    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-    p:location="/WEB-INF/jdbc.properties" />
-
-    <bean id="dataSource"
-      class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-      p:driverClassName="${jdbc.driverClassName}"
-      p:url="${jdbc.url}"
-      p:username="${jdbc.username}"
-      p:password="${jdbc.password}" />
-
-    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
-
-      <bean id="sessionFactory" 
-            class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-          <property name="dataSource" ref="dataSource"/>
-          <property name="annotatedClasses">
-              <list>
-                  <value>model.Category</value>
-                  <value>model.Customer</value>
-                  <value>model.Employee</value>
-                  <value>model.Invoice</value>
-                  <value>model.Orders</value>
-                  <value>model.Product</value>
-                  <value>model.Supplier</value>
-              </list>
-          </property>
-          <property name="hibernateProperties">
-              <props>
-                  <prop key="hibernate.dialect">
-                      org.hibernate.dialect.MySQLDialect
-                  </prop>
-              </props>
-          </property>
-
-      </bean>
-      <bean id="hibernateTemplate" 
-            class="org.springframework.orm.hibernate4.HibernateTemplate"
-            p:sessionFactory-ref="sessionFactory" />
-      
-      <bean id="factoryDao" class="factory.FactoryDao" autowire="byType"/>
-        
 </beans>

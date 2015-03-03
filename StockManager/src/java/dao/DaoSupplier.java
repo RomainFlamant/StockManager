@@ -5,7 +5,6 @@
  */
 package dao;
 
-import model.Orders;
 import model.Supplier;
 
 /**

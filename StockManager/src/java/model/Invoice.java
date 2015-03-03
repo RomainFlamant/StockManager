@@ -1,5 +1,5 @@
 package model;
-// Generated 2 mars 2015 20:31:41 by Hibernate Tools 4.3.1
+// Generated 3 mars 2015 09:18:13 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.AttributeOverride;
@@ -19,14 +19,14 @@ import javax.persistence.Table;
 @Table(name="invoice"
     ,catalog="stockmanager"
 )
-public class Invoice  extends Metier   implements java.io.Serializable {
+public class Invoice extends Metier implements java.io.Serializable {
 
 
-    private InvoiceId id;
-    private Product product;
-    private Supplier supplier;
-    private Long numInvoice;
-    private Long quantityInvoice;
+     private InvoiceId id;
+     private Product product;
+     private Supplier supplier;
+     private Long numInvoice;
+     private Long quantityInvoice;
 
     public Invoice() {
     }
@@ -45,10 +45,12 @@ public class Invoice  extends Metier   implements java.io.Serializable {
        this.quantityInvoice = quantityInvoice;
     }
    
-    @EmbeddedId
+     @EmbeddedId
+
+    
     @AttributeOverrides( {
-    @AttributeOverride(name="idSupplier", column=@Column(name="IdSupplier", nullable=false) ), 
-    @AttributeOverride(name="idProduct", column=@Column(name="IdProduct", nullable=false) ) } )
+        @AttributeOverride(name="idSupplier", column=@Column(name="IdSupplier", nullable=false) ), 
+        @AttributeOverride(name="idProduct", column=@Column(name="IdProduct", nullable=false) ) } )
     public InvoiceId getId() {
         return this.id;
     }
@@ -57,7 +59,7 @@ public class Invoice  extends Metier   implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="IdProduct", nullable=false, insertable=false, updatable=false)
     public Product getProduct() {
         return this.product;
@@ -67,7 +69,7 @@ public class Invoice  extends Metier   implements java.io.Serializable {
         this.product = product;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="IdSupplier", nullable=false, insertable=false, updatable=false)
     public Supplier getSupplier() {
         return this.supplier;
