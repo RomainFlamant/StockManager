@@ -14,17 +14,16 @@
 			<div id="sidebar-left" class="span2">
 				<div class="nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Accueil</span></a></li>	
-						<li><a href="messages.html"><i class="icon-envelope"></i><span class="hidden-tablet"> Produit</span></a></li>
-						<li><a href="tasks.html"><i class="icon-tasks"></i><span class="hidden-tablet"> Clients</span></a></li>
-						<li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> Fournisseur</span></a></li>
-						<li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Facturation</span></a></li>
+						<li><a href="index.stk"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Accueil</span></a></li>	
+						<li><a href="#"><i class="icon-envelope"></i><span class="hidden-tablet"> Produit</span></a></li>
+						<li><a href="#"><i class="icon-tasks"></i><span class="hidden-tablet"> Clients</span></a></li>
+						<li><a href="#"><i class="icon-eye-open"></i><span class="hidden-tablet"> Fournisseur</span></a></li>
+						<li><a href="#"><i class="icon-dashboard"></i><span class="hidden-tablet"> Facturation</span></a></li>
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Administration</span><span class="label label-important"> 3 </span></a>
 							<ul>
-								<li><a class="submenu" href="submenu.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Ajout de compte</span></a></li>
-								<li><a class="submenu" href="submenu2.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Modification de compte</span></a></li>
-								<li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Désactivation de compte</span></a></li>
+								<li><a class="submenu" href="AddEmployee.stk"><i class="icon-file-alt"></i><span class="hidden-tablet"> Ajout de compte</span></a></li>
+								<li><a class="submenu" href="AllEmployee.stk"><i class="icon-file-alt"></i><span class="hidden-tablet"> Modification de compte</span></a></li>
 							</ul>	
 						</li>
 						<!--<li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
