@@ -36,25 +36,4 @@ hibernate SpringMVC
 Script creation table
 
 
-DROP TABLE IF EXISTS Product ; 
-CREATE TABLE Product (IdProduct BIGINT  AUTO_INCREMENT NOT NULL, NameProduct TEXT, DescriptifProduct TEXT, PriceProduct FLOAT, MaxStockProduct INT, MinStockProduct INT, StockProduct INT, IdCategory BIGINT NOT NULL, PRIMARY KEY (IdProduct) ) ENGINE=InnoDB;  
-DROP TABLE IF EXISTS Category ; 
-CREATE TABLE Category (IdCategory BIGINT  AUTO_INCREMENT NOT NULL, NameCategory TEXT, DescriptionCategory TEXT, PRIMARY KEY (IdCategory) ) ENGINE=InnoDB;  
-DROP TABLE IF EXISTS Customer ; 
-CREATE TABLE Customer (IdCustomer BIGINT  AUTO_INCREMENT NOT NULL, NameCustomer BIGINT, SiretCustomer TEXT, TypeCustomer TEXT, AdressCustomer TEXT, VilleCustomer TEXT, CPCustomer BIGINT, PRIMARY KEY (IdCustomer) ) ENGINE=InnoDB;  
-DROP TABLE IF EXISTS Employee ; 
-CREATE TABLE Employee (IdEmployee BIGINT  AUTO_INCREMENT NOT NULL, NameEmployee TEXT, FirstNameEmployee TEXT, EmailEmployee TEXT, MdpEmployee TEXT, PRIMARY KEY (IdEmployee) ) ENGINE=InnoDB;  
-DROP TABLE IF EXISTS Supplier ; 
-CREATE TABLE Supplier (IdSupplier BIGINT  AUTO_INCREMENT NOT NULL, NameSupplier TEXT, SiretSupplier TEXT, AddressSupplier TEXT, VilleSupplier TEXT, CPSupplier BIGINT, PRIMARY KEY (IdSupplier) ) ENGINE=InnoDB;  
-DROP TABLE IF EXISTS Orders ; 
-CREATE TABLE Orders (IdEmployee BIGINT  AUTO_INCREMENT NOT NULL, IdProduct BIGINT NOT NULL, IdCustomer BIGINT NOT NULL, NumOrder BIGINT, QuantityOrder BIGINT, PRIMARY KEY (IdEmployee,  IdProduct,  IdCustomer) ) ENGINE=InnoDB;  
-DROP TABLE IF EXISTS Invoice ; 
-CREATE TABLE Invoice (IdSupplier BIGINT  AUTO_INCREMENT NOT NULL, IdProduct BIGINT NOT NULL, NumInvoice BIGINT, QuantityInvoice BIGINT, PRIMARY KEY (IdSupplier,  IdProduct) ) ENGINE=InnoDB;  ALTER TABLE Product ADD CONSTRAINT FK_Product_IdCategory FOREIGN KEY (IdCategory) REFERENCES Category (IdCategory); 
-
-ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdEmployee FOREIGN KEY (IdEmployee) REFERENCES Employee (IdEmployee); 
-ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdProduct FOREIGN KEY (IdProduct) REFERENCES Product (IdProduct); 
-ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdCustomer FOREIGN KEY (IdCustomer) REFERENCES Customer (IdCustomer); 
-ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdSupplier FOREIGN KEY (IdSupplier) REFERENCES Supplier (IdSupplier); 
-ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdProduct FOREIGN KEY (IdProduct) REFERENCES Product (IdProduct); 
-
-                              
+DROP TABLE IF EXISTS Product ; CREATE TABLE Product (IdProduct BIGINT  AUTO_INCREMENT NOT NULL, NameProduct TEXT, DescriptifProduct TEXT, PriceProduct FLOAT, MaxStockProduct INT, MinStockProduct INT, StockProduct INT, IdCategory BIGINT NOT NULL, PRIMARY KEY (IdProduct) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Category ; CREATE TABLE Category (IdCategory BIGINT  AUTO_INCREMENT NOT NULL, NameCategory TEXT, DescriptionCategory TEXT, PRIMARY KEY (IdCategory) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Customer ; CREATE TABLE Customer (IdCustomer BIGINT  AUTO_INCREMENT NOT NULL, NameCustomer BIGINT, SiretCustomer TEXT, TypeCustomer TEXT, AdressCustomer TEXT, VilleCustomer TEXT, CPCustomer BIGINT, PRIMARY KEY (IdCustomer) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Employee ; CREATE TABLE Employee (IdEmployee BIGINT  AUTO_INCREMENT NOT NULL, NameEmployee TEXT, FirstNameEmployee TEXT, EmailEmployee TEXT, MdpEmployee TEXT, IsActive INT, PRIMARY KEY (IdEmployee) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Supplier ; CREATE TABLE Supplier (IdSupplier BIGINT  AUTO_INCREMENT NOT NULL, NameSupplier TEXT, SiretSupplier TEXT, AddressSupplier TEXT, VilleSupplier TEXT, CPSupplier BIGINT, PRIMARY KEY (IdSupplier) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Orders ; CREATE TABLE Orders (IdEmployee BIGINT  AUTO_INCREMENT NOT NULL, IdProduct BIGINT NOT NULL, IdCustomer BIGINT NOT NULL, NumOrder BIGINT, QuantityOrder BIGINT, DateOrders DATETIME, PRIMARY KEY (IdEmployee,  IdProduct,  IdCustomer) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Invoice ; CREATE TABLE Invoice (IdSupplier BIGINT  AUTO_INCREMENT NOT NULL, IdProduct BIGINT NOT NULL, NumInvoice BIGINT, QuantityInvoice BIGINT, DateInvoice DATETIME, PRIMARY KEY (IdSupplier,  IdProduct) ) ENGINE=InnoDB;  ALTER TABLE Product ADD CONSTRAINT FK_Product_IdCategory FOREIGN KEY (IdCategory) REFERENCES Category (IdCategory); ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdEmployee FOREIGN KEY (IdEmployee) REFERENCES Employee (IdEmployee); ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdProduct FOREIGN KEY (IdProduct) REFERENCES Product (IdProduct); ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdCustomer FOREIGN KEY (IdCustomer) REFERENCES Customer (IdCustomer); ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdSupplier FOREIGN KEY (IdSupplier) REFERENCES Supplier (IdSupplier); ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdProduct FOREIGN KEY (IdProduct) REFERENCES Product (IdProduct); 
