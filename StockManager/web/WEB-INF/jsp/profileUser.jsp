@@ -15,7 +15,7 @@
     </ul>
     <div class="row-fluid">	
         <ul class="dropdown-menu notifications">
-           	
+
             <li class="warning">
                 <a href="#">
                     <span class="icon red"><i class="icon-shopping-cart"></i></span>
@@ -64,4 +64,4 @@
         </ul>
     </div>
 </div>
-    <%@include file="includes/footer.jsp" %>
+<%@include file="includes/footer.jsp" %>

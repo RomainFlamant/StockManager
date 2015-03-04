@@ -5,7 +5,9 @@
  */
 package dao;
 
+import hibernate.HibernateUtil;
 import model.Customer;
+import org.hibernate.Session;
 
 /**
  *
@@ -18,5 +20,9 @@ public class DaoCustomer extends DaoGeneric<Customer>{
     }
 
    
-    
+    public Customer getCustomersWithId(Long id) {
+        Session session = HibernateUtil.getSession();
+        Customer cust = (Customer) session.load(Customer.class, id);
+        return cust;
+    }
 }

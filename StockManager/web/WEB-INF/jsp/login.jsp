@@ -65,30 +65,30 @@
                         </div>
                         <h2>Se connecter</h2>
                         <form:form class="form-horizontal" action="" method="post" modelAttribute="user" >
-                           
-                                <div class="input-prepend" title="Username">
-                                    <span class="add-on"><i class="halflings-icon user"></i></span>
-                                     <form:input path="emailEmployee" class="input-large span10" name="username" id="username" type="text" placeholder="email"/>
-                                </div>
-                                <div class="clearfix"></div>
 
-                                <div class="input-prepend" title="Password">
-                                    <span class="add-on"><i class="halflings-icon lock"></i></span>
-                                     <form:input path="mdpEmployee" class="input-large span10" name="password" id="password" type="password" placeholder="password"/>
-                                </div>
-                                <div class="clearfix"></div>
+                            <div class="input-prepend" title="Username">
+                                <span class="add-on"><i class="halflings-icon user"></i></span>
+                                    <form:input path="emailEmployee" class="input-large span10" name="username" id="username" type="text" placeholder="email"/>
+                            </div>
+                            <div class="clearfix"></div>
 
-                                <label class="remember" for="remember"><input type="checkbox" id="remember" />Se souvenir</label>
+                            <div class="input-prepend" title="Password">
+                                <span class="add-on"><i class="halflings-icon lock"></i></span>
+                                    <form:input path="mdpEmployee" class="input-large span10" name="password" id="password" type="password" placeholder="password"/>
+                            </div>
+                            <div class="clearfix"></div>
 
-                                <div class="button-login">	
-                                    <button type="submit" class="btn btn-primary">Login</button>
-                                </div>
-                                <div class="clearfix"></div>
+                            <label class="remember" for="remember"><input type="checkbox" id="remember" />Se souvenir</label>
+
+                            <div class="button-login">	
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                            <div class="clearfix"></div>
                         </form:form>
                         <hr>
                         <h3>Mot de passe oublié?</h3>
                         <p>
-                           cliquez <a href="#">ici</a> pour obtenir un nouveau.
+                            cliquez <a href="#">ici</a> pour obtenir un nouveau.
                         </p>	
                     </div><!--/span-->
                 </div><!--/row-->

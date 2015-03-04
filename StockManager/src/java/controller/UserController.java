@@ -42,11 +42,21 @@ public class UserController {
             return "login";
         }
     }
+    
+    /////////////////////////////////////////
+    //DECO EMPLOYEES
+    @RequestMapping("/deconection")
+    public String decoEmployee(Model m, HttpSession session) {
+        session.removeAttribute("userConnecte");
+        return "redirect:/index.stk";
+    }
+    //
+    /////////////////////////////////////////
 
     /////////////////////////////////////////
     //LISTE DES EMPLOYEES
     @RequestMapping("/AllEmployee")
-    public String allEmployee(Model m) {
+    public String decoEmployee(Model m) {
         DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
         List<Metier> l = dao.selectAll("Employee");
         m.addAttribute("myList", l);

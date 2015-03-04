@@ -9,54 +9,56 @@
 <%@include file="includes/header.jsp" %>
 <%@include file="includes/menu.jsp" %>
 <div id="content" class="span10">
-			
-			
-			<ul class="breadcrumb">
+
+
+    <ul class="breadcrumb">
         <li>
             <i class="icon-home"></i>
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Liste des Employés</a></li>
+        <li><a href="#">Liste des clients</a></li>
     </ul>
-<div class="row-fluid sortable">		
+    <a class="quick-button span2" href="AddClients.stk">
+        <i class="icon-group"></i>
+        <p>Ajout d'un client</p>
+    </a><br/><br/><br/><br/><br/><br/>
+    <div class="row-fluid sortable">		
 
-    <table class="table table-striped table-bordered bootstrap-datatable datatable">
-              <thead>
-                      <tr>
-                              <th>Nom</th>
-                              <th>Prénom</th>
-                              <th>email</th>
-                              <th>Status</th>
-                              <th>Actions</th>
-                      </tr>
-              </thead>   
-              <tbody>
-                  
-                  <c:forEach items="${myList}" var="element"> 
+        <table class="table table-striped table-bordered bootstrap-datatable datatable">
+            <thead>
+                <tr>
+                    <th>Id client</th>
+                    <th>Nom</th>
+                    <th>Siret</th>
+                    <th>Type</th>
+                    <th>Adresse</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>   
+            <tbody>
+                <c:forEach items="${myList}" var="element"> 
                     <tr>
-                    <td>${element.nameCustomer}</td>
-                        <td class="center">${element.nameCustomer}</td>
-                        <td class="center">${element.nameCustomer}</td>
+                        <td>${element.idCustomer}</td>
+                        <td>${element.nameCustomer}</td>
+                        <td class="center">${element.siretCustomer}</td>
+                        <td class="center">${element.typeCustomer}</td>
                         <td class="center">
-                              
+                            ${element.adressCustomer} ${element.cpcustomer} ${element.villeCustomer} 
                         </td>
                         <td class="center">
-                                <a class="btn btn-success" href="#">
-                                        <i class="halflings-icon white zoom-in"></i>  
-                                </a>
-                                <a class="btn btn-info" href="#">
-                                        <i class="halflings-icon white edit"></i>  
-                                </a>
-                                <a class="btn btn-danger" href="SupEmployee.stk?id=${element.nameCustomer}">
-                                        <i class="halflings-icon white trash"></i> 
-                                </a>
+                            <a class="btn btn-info" href="ModifClient.stk?id=${element.idCustomer}">
+                                <i class="halflings-icon white edit"></i>  
+                            </a>
+                            <a class="btn btn-danger" href="SupClient.stk?id=${element.idCustomer}">
+                                <i class="halflings-icon white trash"></i> 
+                            </a>
                         </td>
                     </tr>
-                  </c:forEach>
-              </tbody>
-      </table>            		
-</div><!--/row-->
+                </c:forEach>
+            </tbody>
+        </table>            		
+    </div><!--/row-->
 
 </div>
 <%@include file="includes/footer.jsp" %>

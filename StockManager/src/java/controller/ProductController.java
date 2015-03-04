@@ -5,7 +5,17 @@
  */
 package controller;
 
+import dao.DaoProduct;
+import factory.FactoryDao;
+import java.util.Collections;
+import java.util.List;
+import model.Category;
+import model.Metier;
+import model.Product;
+import org.hibernate.mapping.Collection;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -16,6 +26,17 @@ import org.springframework.stereotype.Controller;
 public class ProductController {
 
     
+    /////////////////////////////////////////
+    //LISTE DES CLIENTS
+    @RequestMapping("/AllProduct")
+    public String allEmployee(Model m) {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List l = dao.selectAll("Product");
+        m.addAttribute("myList", l);
+        return "listproduit";
+    }
+    //
+    /////////////////////////////////////////
     
     
 }

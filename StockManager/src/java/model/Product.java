@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="product"
     ,catalog="stockmanager"
 )
-public class Product extends Metier implements java.io.Serializable {
+public class Product extends Metier implements java.io.Serializable{
 
 
      private long idProduct;
@@ -67,7 +67,7 @@ public class Product extends Metier implements java.io.Serializable {
         this.idProduct = idProduct;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="IdCategory", nullable=false)
     public Category getCategory() {
         return this.category;
@@ -154,6 +154,7 @@ public class Product extends Metier implements java.io.Serializable {
     public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
     }
+
 
 
 

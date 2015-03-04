@@ -17,7 +17,7 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Ajout d'un employé</a></li>
+        <li><a href="#">Ajout d'un clients</a></li>
     </ul>   
     <c:set var="valeur" scope="session" value="success"/>
     <c:if test="${ResultForm == valeur}">
@@ -26,32 +26,48 @@
             <strong>Ajout réussi</strong> L'employé peut dès à présent se connecter.
         </div>
     </c:if>
-    <form:form cssClass="form-horizontal" action="" method="post" modelAttribute="employee">
+
+    <form:form cssClass="form-horizontal" action="" method="post" modelAttribute="customer">
         <div class="form-actions" style="margin-bottom: 20px;">
-            <h1>Merci de rentrer toutes les informations suivantes.</h1>
+            <h1>Ajout client.<br><br>Merci de rentrer toutes les informations suivantes.</h1>
         </div>
         <div class="control-group">
-            <form:label cssClass="control-label" path="nameEmployee">Nom :</form:label>
+            <form:label cssClass="control-label" path="nameCustomer">Nom :</form:label>
                 <div class="controls">
-                <form:input cssClass="span6 typeahead"  path="nameEmployee"/>
+                <form:input cssClass="span6 typeahead"  path="nameCustomer"/>
             </div>
         </div>
         <div class="control-group">
-            <form:label cssClass="control-label" path="firstNameEmployee">Prénom :</form:label>
+            <form:label cssClass="control-label" path="siretCustomer">Siret :</form:label>
                 <div class="controls">
-                <form:input cssClass="span6 typeahead"  path="firstNameEmployee"/>
+                <form:input cssClass="span6 typeahead"  path="siretCustomer"/>
             </div>
         </div>
         <div class="control-group">
-            <form:label cssClass="control-label" path="emailEmployee">Email :</form:label>
+            <form:label cssClass="control-label" path="typeCustomer">Type :</form:label>
                 <div class="controls">
-                <form:input cssClass="span6 typeahead"  path="emailEmployee"/>
+                    <select id="typeCustomer" name="typeCustomer">
+                        <option value="Pro">Professionnel</option>
+                        <option value="Particulier">Particulier</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+            <form:label cssClass="control-label" path="adressCustomer">Adresse :</form:label>
+                <div class="controls">
+                <form:input cssClass="span6 typeahead"  path="adressCustomer"/>
             </div>
         </div>
         <div class="control-group">
-            <form:label cssClass="control-label" path="mdpEmployee">Mot de passe :</form:label>
+            <form:label cssClass="control-label" path="villeCustomer">Ville :</form:label>
                 <div class="controls">
-                <form:password cssClass="span6 typeahead"  path="mdpEmployee"/>
+                <form:input cssClass="span6 typeahead"  path="villeCustomer"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <form:label cssClass="control-label" path="cpcustomer">Cp :</form:label>
+                <div class="controls">
+                <form:input cssClass="span6 typeahead"  path="cpcustomer"/>
             </div>
         </div>
         <div class="form-actions">

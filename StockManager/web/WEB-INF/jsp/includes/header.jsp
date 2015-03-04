@@ -6,6 +6,7 @@
 
 <%@page import="model.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,6 +52,9 @@
     </head>
 
     <body>
+        <c:if test="${sessionScope.userConnecte == null}">
+            <c:redirect url="login.stk"></c:redirect>
+        </c:if>
         <!-- start: Header -->
         <div class="navbar">
             <div class="navbar-inner">
@@ -136,7 +140,7 @@
                                         <span>Paramètre Compte</span>
                                     </li>
                                     <li><a href="profileUser.stk"><i class="halflings-icon user"></i> Profile</a></li>
-                                    <li><a href="login.stk"><i class="halflings-icon off"></i> Deconnection</a></li>
+                                    <li><a href="deconection.stk"><i class="halflings-icon off"></i> Deconnection</a></li>
                                 </ul>
                             </li>
                             <!-- end: User Dropdown -->
