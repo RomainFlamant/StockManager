@@ -28,7 +28,7 @@
     </c:if>
     <form:form cssClass="form-horizontal" action="" method="post" modelAttribute="employee">
         <div class="form-actions" style="margin-bottom: 20px;">
-            <h1>Merci de rentrer toutes les informations suivante.</h1>
+            <h1>Merci de rentrer toutes les informations suivantes.</h1>
         </div>
             <div class="control-group">
                 <form:label cssClass="control-label" path="nameEmployee">Nom :</form:label>

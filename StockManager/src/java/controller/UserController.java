@@ -41,7 +41,6 @@ public class UserController {
         } else {
             return "login";
         }
-
     }
 
     /////////////////////////////////////////
@@ -100,4 +99,11 @@ public class UserController {
     }
     //
     /////////////////////////////////////////
+    
+    @RequestMapping(value = "/profileUser")
+    public String showProfileUser()
+    {
+        return "profileUser";
+        
+    }
 }

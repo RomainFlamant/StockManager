@@ -135,7 +135,7 @@
                                     <li class="dropdown-menu-title">
                                         <span>Paramètre Compte</span>
                                     </li>
-                                    <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+                                    <li><a href="profileUser.stk"><i class="halflings-icon user"></i> Profile</a></li>
                                     <li><a href="login.stk"><i class="halflings-icon off"></i> Deconnection</a></li>
                                 </ul>
                             </li>
