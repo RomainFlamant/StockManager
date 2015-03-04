@@ -32,23 +32,14 @@
                       </tr>
               </thead>   
               <tbody>
-                  <c:if test="${myList.isEmpty()}">
-                      <tr>
-                          <td colspan="5">Aucun resultat trouvé</td>
-                    </tr>
-                  </c:if>
+                  
                   <c:forEach items="${myList}" var="element"> 
                     <tr>
-                    <td>${element.nameEmployee}</td>
-                        <td class="center">${element.firstNameEmployee}</td>
-                        <td class="center">${element.emailEmployee}</td>
+                    <td>${element.nameCustomer}</td>
+                        <td class="center">${element.nameCustomer}</td>
+                        <td class="center">${element.nameCustomer}</td>
                         <td class="center">
-                            <c:if test="${element.isActive == 1}" >
-                                <span class="label label-success">Actif</span>
-                            </c:if>
-                            <c:if test="${element.isActive == 0}">
-                                <span class="label label-warning">Désactive</span>
-                            </c:if>    
+                              
                         </td>
                         <td class="center">
                                 <a class="btn btn-success" href="#">
@@ -57,7 +48,7 @@
                                 <a class="btn btn-info" href="#">
                                         <i class="halflings-icon white edit"></i>  
                                 </a>
-                                <a class="btn btn-danger" href="SupEmployee.stk?id=${element.idEmployee}">
+                                <a class="btn btn-danger" href="SupEmployee.stk?id=${element.nameCustomer}">
                                         <i class="halflings-icon white trash"></i> 
                                 </a>
                         </td>

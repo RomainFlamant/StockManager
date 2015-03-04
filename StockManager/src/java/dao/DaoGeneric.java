@@ -45,7 +45,7 @@ public abstract class DaoGeneric<T extends Metier> {
         Transaction trx = session.beginTransaction();
 
         try {
-            session.update(objet);
+            session.merge(objet);
             trx.commit();
         } catch (HibernateException ex) {
             trx.rollback();

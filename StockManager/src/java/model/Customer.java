@@ -22,7 +22,7 @@ public class Customer extends Metier implements java.io.Serializable {
 
 
      private long idCustomer;
-     private Long nameCustomer;
+     private String nameCustomer;
      private String siretCustomer;
      private String typeCustomer;
      private String adressCustomer;
@@ -37,7 +37,7 @@ public class Customer extends Metier implements java.io.Serializable {
     public Customer(long idCustomer) {
         this.idCustomer = idCustomer;
     }
-    public Customer(long idCustomer, Long nameCustomer, String siretCustomer, String typeCustomer, String adressCustomer, String villeCustomer, Long cpcustomer, Set<Orders> orderses) {
+    public Customer(long idCustomer, String nameCustomer, String siretCustomer, String typeCustomer, String adressCustomer, String villeCustomer, Long cpcustomer, Set<Orders> orderses) {
        this.idCustomer = idCustomer;
        this.nameCustomer = nameCustomer;
        this.siretCustomer = siretCustomer;
@@ -61,12 +61,12 @@ public class Customer extends Metier implements java.io.Serializable {
     }
 
     
-    @Column(name="NameCustomer")
-    public Long getNameCustomer() {
+    @Column(name="NameCustomer", length=65535)
+    public String getNameCustomer() {
         return this.nameCustomer;
     }
     
-    public void setNameCustomer(Long nameCustomer) {
+    public void setNameCustomer(String nameCustomer) {
         this.nameCustomer = nameCustomer;
     }
 
@@ -120,7 +120,7 @@ public class Customer extends Metier implements java.io.Serializable {
         this.cpcustomer = cpcustomer;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
     public Set<Orders> getOrderses() {
         return this.orderses;
     }

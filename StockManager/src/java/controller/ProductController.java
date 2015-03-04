@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 
 /**
  *
- * @author userinsta
+ * @author Romain
  */
 @Controller
 //@RequestMapping(value = {"/user", "/admin"})

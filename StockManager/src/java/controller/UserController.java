@@ -6,9 +6,7 @@
 package controller;
 
 import dao.DaoEmployee;
-import dao.DaoGeneric;
 import factory.FactoryDao;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import model.Employee;
@@ -16,10 +14,8 @@ import model.Metier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**

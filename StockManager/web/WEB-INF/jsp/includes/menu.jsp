@@ -16,11 +16,11 @@
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li><a href="index.stk"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Accueil</span></a></li>	
 						<li><a href="#"><i class="icon-envelope"></i><span class="hidden-tablet"> Produit</span></a></li>
-						<li><a href="#"><i class="icon-tasks"></i><span class="hidden-tablet"> Clients</span></a></li>
+						<li><a href="AllCustomers.stk"><i class="icon-tasks"></i><span class="hidden-tablet"> Clients</span></a></li>
 						<li><a href="#"><i class="icon-eye-open"></i><span class="hidden-tablet"> Fournisseur</span></a></li>
 						<li><a href="#"><i class="icon-dashboard"></i><span class="hidden-tablet"> Facturation</span></a></li>
 						<li>
-							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Administration</span><span class="label label-important"> 3 </span></a>
+							<a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Administration</span></a>
 							<ul>
 								<li><a class="submenu" href="AddEmployee.stk"><i class="icon-file-alt"></i><span class="hidden-tablet"> Ajout de compte</span></a></li>
 								<li><a class="submenu" href="AllEmployee.stk"><i class="icon-file-alt"></i><span class="hidden-tablet"> Modification de compte</span></a></li>
