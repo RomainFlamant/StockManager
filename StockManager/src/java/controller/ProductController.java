@@ -7,6 +7,7 @@ package controller;
 
 import dao.DaoProduct;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import model.Category;
@@ -15,7 +16,9 @@ import model.Product;
 import org.hibernate.mapping.Collection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -38,5 +41,48 @@ public class ProductController {
     //
     /////////////////////////////////////////
     
+    /////////////////////////////////////////
+    //AJOUT DES CLIENTS
+    @RequestMapping(value = "/AddProduit",method=RequestMethod.GET)
+    public String addProduct(Model m) {
+        m.addAttribute("produit", new Product());
+        return "addProduct";
+    }
+
     
+    @RequestMapping(value = "/AddProduit",method=RequestMethod.POST)
+    public String addPrductToDB(Product cust, Model m) {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        dao.update(cust);
+        return "redirect:/AllCustomers.stk";
+    }
+    //
+    /////////////////////////////////////////
+    
+    @ModelAttribute(value = "lProduitHorsStock")
+    public List<Product> lProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
+    }
+    
+    @ModelAttribute(value = "nbProduitHorsStock")
+    public int nbProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        int nb = 0;
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                nb++;
+        }
+        return nb;
+    }
 }

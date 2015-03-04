@@ -6,12 +6,15 @@
 package controller;
 
 import dao.DaoEmployee;
+import dao.DaoProduct;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import model.Employee;
 import model.Metier;
+import model.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,7 +42,7 @@ public class UserController {
         Employee employe = dao.connection(user);
         if (employe != null && employe.getIsActive()==1) {
             session.setAttribute("userConnecte", employe);
-            return "index";
+            return "redirect:/index.stk";
         } else {
             return "login";
         }
@@ -166,6 +169,33 @@ public class UserController {
     public String modifierEmploye(HttpServletRequest request, Model m) {
         DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
         return "modifierEmploye";
+    }
+    
+    @ModelAttribute(value = "lProduitHorsStock")
+    public List<Product> lProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
+    }
+    
+    @ModelAttribute(value = "nbProduitHorsStock")
+    public int nbProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        int nb = 0;
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                nb++;
+        }
+        return nb;
     }
 
 }

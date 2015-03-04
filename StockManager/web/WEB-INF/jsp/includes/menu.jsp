@@ -18,6 +18,7 @@
                     <li><a href="AllProduct.stk"><i class="icon-envelope"></i><span class="hidden-tablet"> Produit</span></a></li>
                     <li><a href="AllCustomers.stk"><i class="icon-tasks"></i><span class="hidden-tablet"> Clients</span></a></li>
                     <li><a href="#"><i class="icon-eye-open"></i><span class="hidden-tablet"> Fournisseur</span></a></li>
+                    <li><a href="#"><i class="icon-dashboard"></i><span class="hidden-tablet"> Commande</span></a></li>
                     <li><a href="#"><i class="icon-dashboard"></i><span class="hidden-tablet"> Facturation</span></a></li>
                     <li>
                         <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Administration</span></a>

@@ -73,55 +73,23 @@
                                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                                     <i class="icon-bell"></i>
                                     <span class="badge red">
-                                        11 </span>
+                                        ${nbProduitHorsStock} </span>
                                 </a>
                                 <ul class="dropdown-menu notifications">
                                     <li class="dropdown-menu-title">
-                                        <span>Vous avez 11 alerte de stock</span>
+                                        <span>Vous avez ${nbProduitHorsStock} alerte de stock</span>
                                         <a href="#refresh"><i class="icon-repeat"></i></a>
-                                    </li>	
-                                    <li class="warning">
+                                    </li>
+                                    <c:forEach items="${lProduitHorsStock}" var="element">
+                                        <li class="warning">
                                         <a href="#">
                                             <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit 100283</span>
+                                            <span class="message">Produit n°${element.idProduct} : {element.idProduct}</span>
 
                                         </a>
                                     </li>
-                                    <li class="warning">
-                                        <a href="#">
-                                            <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit 100283</span>
-
-                                        </a>
-                                    </li>
-                                    <li class="warning">
-                                        <a href="#">
-                                            <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit 100283</span>
-
-                                        </a>
-                                    </li>
-                                    <li class="warning">
-                                        <a href="#">
-                                            <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit 100283</span>
-
-                                        </a>
-                                    </li>
-                                    <li class="warning">
-                                        <a href="#">
-                                            <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit 100283</span>
-
-                                        </a>
-                                    </li>
-                                    <li class="warning">
-                                        <a href="#">
-                                            <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit 100283</span>
-
-                                        </a>
-                                    </li>
+                                    </c:forEach>
+                                    
                                     <li class="dropdown-menu-sub-footer">
                                         <a>View all notifications</a>
                                     </li>	

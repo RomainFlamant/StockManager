@@ -6,12 +6,16 @@
 package controller;
 
 import dao.DaoCustomer;
+import dao.DaoProduct;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import java.util.List;
 import model.Customer;
 import model.Metier;
+import model.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,6 +98,31 @@ public class CustomerController {
     //
     /////////////////////////////////////////
     
+    @ModelAttribute(value = "lProduitHorsStock")
+    public List<Product> lProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
+    }
     
+    @ModelAttribute(value = "nbProduitHorsStock")
+    public int nbProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        int nb = 0;
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                nb++;
+        }
+        return nb;
+    }
     
 }

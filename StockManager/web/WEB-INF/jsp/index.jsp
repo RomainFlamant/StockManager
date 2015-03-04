@@ -14,10 +14,10 @@
     </ul>
     <div class="row-fluid">	
 
-        <a class="quick-button metro yellow span2">
+        <a href="AllCustomers.stk" class="quick-button metro yellow span2">
             <i class="icon-credit-card"></i>
             <p>Clients</p>
-            <span class="badge">237</span>
+            <span class="badge">${clientNbr}</span>
         </a>
         <a class="quick-button metro red span2">
             <i class="icon-truck"></i>
@@ -32,12 +32,12 @@
         <a class="quick-button metro green span2">
             <i class="icon-retweet"></i>
             <p>Produit hors stock</p>
-            <span class="badge">11</span>
+            <span class="badge">${produitHSNbr}</span>
         </a>
         <a class="quick-button metro pink span2">
             <i class="icon-eye-close"></i>
             <p>Produit en surplu</p>
-            <span class="badge">88</span>
+            <span class="badge">${produitSSNbr}</span>
         </a>
         <a class="quick-button metro black span2">
             <i class="icon-money"></i>
