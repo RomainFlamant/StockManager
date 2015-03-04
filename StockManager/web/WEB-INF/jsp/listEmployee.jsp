@@ -54,7 +54,7 @@
                                 <a class="btn btn-success" href="#">
                                         <i class="halflings-icon white zoom-in"></i>  
                                 </a>
-                                <a class="btn btn-info" href="#">
+                                <a class="btn btn-info" href="modifierEmploye.stk">
                                         <i class="halflings-icon white edit"></i>  
                                 </a>
                                 <a class="btn btn-danger" href="SupEmployee.stk?id=${element.idEmployee}">

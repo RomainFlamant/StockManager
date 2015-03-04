@@ -3005,3 +3005,9 @@ ul.messagesList li span.date {
 .navbar .brand{
 	font-size: 35px;
 }
+
+#ParametresCompte {
+background: #f1f1f1;
+border: 1px solid #e5e5e5;
+padding-left: 10px;
+}
