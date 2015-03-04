@@ -5,7 +5,10 @@
  */
 package dao;
 
+import hibernate.HibernateUtil;
+import model.Customer;
 import model.Supplier;
+import org.hibernate.Session;
 
 /**
  *
@@ -17,5 +20,11 @@ public class DaoSupplier extends DaoGeneric<Supplier>{
         super();
     }
     
+    
+    public Supplier getSupplierWithId(Long id) {
+        Session session = HibernateUtil.getSession();
+        Supplier cust = (Supplier) session.load(Supplier.class, id);
+        return cust;
+    }
     
 }

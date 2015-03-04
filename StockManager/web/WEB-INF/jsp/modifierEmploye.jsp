@@ -1,9 +1,8 @@
 <%-- 
-    Document   : modifierProfile
-    Created on : 3 mars 2015, 15:22:26
+    Document   : upCustomer
+    Created on : 4 mars 2015, 11:14:04
     Author     : mou_h00
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -17,52 +16,41 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Modification de l'empoyé</a></li>
+        <li><a href="#">Modification employé</a></li>
     </ul>   
-    <c:set var="valeur" scope="session" value="success"/>
-    <c:if test="${ResultForm == valeur}">
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Modification réussie</strong> Vous pouvez vous connecter avec votre nouveau mot de passe.
-        </div>
-    </c:if>
-    
-     <c:set var="valeurError" scope="session" value="error"/>
-    <c:if test="${ResultFormError == valeurError}">
-        <div class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong> Echec Modification </strong> Le nouveau de mot de passe et sa confirmation doit correspondre.
-        </div>
-    </c:if>
-    <form cssClass="form-horizontal" action="" method="post">
+    <form:form cssClass="form-horizontal" action="" method="post" modelAttribute="employe">
         <div class="form-actions" style="margin-bottom: 20px;">
-            <h1>Merci de rentrer toutes les informations suivantes.</h1>
+            <h1>Modification employé.<br><br>Merci de rentrer toutes les informations suivantes.</h1>
         </div>
-            <div class="control-group">
-                <label cssClass="control-label" >Ancien mot de passe :<label>
+        <div class="control-group hidden">
+            <form:label cssClass="control-label" path="idEmployee">Id :</form:label>
                 <div class="controls">
-                <input cssClass="span6 typeahead" name="ancienmdp"  type="password" required/>
-                </div>
+                <form:input cssClass="span6 typeahead"  path="idEmployee"/>
             </div>
-             <div class="control-group">
-                <label cssClass="control-label" >Nouveau mot de passe :<label>
+        </div>
+        <div class="control-group">
+            <form:label cssClass="control-label" path="nameEmployee">Nom :</form:label>
                 <div class="controls">
-                <input cssClass="span6 typeahead" name="nouveaumdp"  type="password"  required/>
-                </div>
+                <form:input cssClass="span6 typeahead"  path="nameEmployee"/>
             </div>
-         <div class="control-group">
-                <label cssClass="control-label" >Confirmation mot de passe :<label>
+        </div>
+        <div class="control-group">
+            <form:label cssClass="control-label" path="firstNameEmployee">Prénom :</form:label>
                 <div class="controls">
-                <input cssClass="span6 typeahead" name="confirmationmdp"  type="password"  required/>
-                </div>
+                <form:input cssClass="span6 typeahead"  path="firstNameEmployee"/>
             </div>
-                
-               
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <button type="reset" class="btn">Anuler</button>
+        </div>
+          <div class="control-group">
+            <form:label cssClass="control-label" path="emailEmployee">Email :</form:label>
+                <div class="controls">
+                <form:input cssClass="span6 typeahead"  path="emailEmployee"/>
             </div>
-    </form>
+        </div>  
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <a href="AllEmployee.stk" class="btn">Anuler</a>
+        </div>
+    </form:form>
 </div>
 
 <%@include file="includes/footer.jsp" %>

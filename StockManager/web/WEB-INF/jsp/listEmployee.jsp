@@ -24,6 +24,7 @@
         <table class="table table-striped table-bordered bootstrap-datatable datatable">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>email</th>
@@ -39,6 +40,7 @@
                 </c:if>
                 <c:forEach items="${myList}" var="element"> 
                     <tr>
+                        <td>${element.idEmployee}</td>
                         <td>${element.nameEmployee}</td>
                         <td class="center">${element.firstNameEmployee}</td>
                         <td class="center">${element.emailEmployee}</td>
@@ -54,7 +56,7 @@
                                 <a class="btn btn-success" href="#">
                                         <i class="halflings-icon white zoom-in"></i>  
                                 </a>
-                                <a class="btn btn-info" href="modifierEmploye.stk">
+                                <a class="btn btn-info" href="modifierEmploye.stk?id=${element.idEmployee}">
                                         <i class="halflings-icon white edit"></i>  
                                 </a>
                                 <a class="btn btn-danger" href="SupEmployee.stk?id=${element.idEmployee}">

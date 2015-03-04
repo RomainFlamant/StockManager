@@ -24,7 +24,7 @@
         <hr>
         <h5>Adresse électronique</h5><span id="Main_AdresseElectronique">${sessionScope.userConnecte.emailEmployee}</span>
         <hr>
-        <span id="Main_MotDePAsse" class="alert alert-info">******* Mot de passe valide</span> &nbsp;<a href="modifierProfile.stk"><img src="img/Modify.png" alt="" title="Changer votre mot de passe"></a>
+        <span id="Main_MotDePAsse" class="alert alert-info">******* Modifier votre mot de passe</span> &nbsp;<a href="modifierProfile.stk"><img src="img/Modify.png" alt="" title="Changer votre mot de passe"></a>
         <hr>
     </div>
 </div>
