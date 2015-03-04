@@ -5,11 +5,13 @@
  */
 package controller;
 
+import dao.DaoCustomer;
 import dao.DaoEmployee;
 import factory.FactoryDao;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import model.Customer;
 import model.Employee;
 import model.Metier;
 import org.springframework.stereotype.Controller;
@@ -39,7 +41,7 @@ public class UserController {
         Employee employe = dao.connection(user);
         if (employe != null && employe.getIsActive()==1) {
             session.setAttribute("userConnecte", employe);
-            return "index";
+            return "redirect:/index.stk";
         } else {
             return "login";
         }
@@ -133,9 +135,8 @@ public class UserController {
         DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
         String nouveaumdp = request.getParameter("nouveaumdp");
         String confirmationmdp = request.getParameter("confirmationmdp");
-        String ancienmdp = request.getParameter("ancienmdp");
         Employee emp = (Employee) request.getSession().getAttribute("userConnecte");
-        //vériefier les deux mots de passe correspondent
+        //vérifie si les deux mots de passe correspondent
         if (!nouveaumdp.equals(confirmationmdp)) {
             m.addAttribute("ResultFormError", "error");
             m.addAttribute("employee", new Employee());
@@ -149,23 +150,28 @@ public class UserController {
         }
         return "modifierProfile";
     }
-
     
     //
     /////////////////////////////////////////
     /////////////////////////////////////////
-    //Modification de l'employ
+    //Modification employé
     //
-    @RequestMapping(value = "/modifierEmploye", method = RequestMethod.GET)
-    public String modifierEmploye(Model m) {
-        m.addAttribute("employee", new Employee());
+   @RequestMapping(value = "/modifierEmploye",method=RequestMethod.GET)
+    public String upEmploye(@RequestParam("id") Long id,Model m) {
+        DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
+        Employee emp = dao.getEmployeeWithId(id);
+        m.addAttribute("employe", emp);
         return "modifierEmploye";
     }
-
-    @RequestMapping(value = "/modifierEmploye", method = RequestMethod.POST)
-    public String modifierEmploye(HttpServletRequest request, Model m) {
+    
+    @RequestMapping(value = "/modifierEmploye",method=RequestMethod.POST)
+    public String upEmploye(Employee emp, Model m) {
         DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
-        return "modifierEmploye";
+        Employee empWithId=dao.getEmployeeWithId(emp.getIdEmployee());
+        emp.setMdpEmployee(empWithId.getMdpEmployee());
+        emp.setIsActive(empWithId.getIsActive());
+        dao.update(emp); 
+        return "redirect:/AllEmployee.stk";
     }
 
 }

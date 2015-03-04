@@ -60,7 +60,7 @@
                
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
-                <button type="reset" class="btn">Anuler</button>
+              <a href="profileUser.stk" class="btn">Anuler</a>
             </div>
     </form>
 </div>
