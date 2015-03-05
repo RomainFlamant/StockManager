@@ -17,34 +17,33 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Liste des clients</a></li>
+        <li><a href="#">Liste des facture</a></li>
     </ul>
     <a class="quick-button span2" href="addSupplier.stk">
         <i class="icon-group"></i>
-        <p>Ajout d'un fournisseur</p>
+        <p>Ajout d'une facture</p>
     </a><br/><br/><br/><br/><br/><br/>
     <div class="row-fluid sortable">		
 
         <table class="table table-striped table-bordered bootstrap-datatable datatable">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nom</th>
-                    <th>Siret</th>
-                    <th>Adresse</th>
-                    <th>Actions</th>
+                    <th>Num</th>
+                    <th>Produit</th>
+                    <th>Fournisseur</th>
+                    <th>Quantité</th>
+                    <th>Date</th>
                     
                 </tr>
             </thead>   
             <tbody>
                 <c:forEach items="${myList}" var="element"> 
                     <tr>
-                        <td>${element.idSupplier}</td>
-                        <td>${element.nameSupplier}</td>
-                        <td class="center">${element.siretSupplier}</td>
-                        <td class="center">
-                            ${element.addressSupplier} ${element.cpsupplier} ${element.villeSupplier} 
-                        </td>
+                        <td>${element.numInvoice}</td>
+                        <td class="center">${element.product.nameProduct}</td>
+                        <td class="center">${element.supplier.nameSupplier}</td>
+                        <td class="center">${element.quantityInvoice}</td>
+                        <td class="center">${element.dateInvoice}</td>
                         <td class="center">
                             <a class="btn btn-info" href="upSupplier.stk?id=${element.idSupplier}">
                                 <i class="halflings-icon white edit"></i>  

@@ -5,7 +5,6 @@
  */
 package controller;
 
-import dao.DaoCustomer;
 import dao.DaoEmployee;
 import dao.DaoProduct;
 import factory.FactoryDao;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import model.Customer;
 import model.Employee;
 import model.Metier;
 import model.Product;

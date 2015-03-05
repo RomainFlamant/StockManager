@@ -6,6 +6,7 @@
 package controller;
 
 import dao.DaoCategory;
+import dao.DaoGeneric;
 import dao.DaoInvoice;
 import dao.DaoProduct;
 import factory.FactoryDao;
@@ -16,6 +17,7 @@ import model.Category;
 import model.Invoice;
 import model.Metier;
 import model.Product;
+import model.Supplier;
 import org.hibernate.mapping.Collection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +47,7 @@ public class InvoiceController {
     
     /////////////////////////////////////////
     //AJOUT DES Invoice
-    @RequestMapping(value = "/AddInvoice",method=RequestMethod.GET)
+    @RequestMapping(value = "/addInvoice",method=RequestMethod.GET)
     public String addProduct(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("history", hist1);
         m.addAttribute("history2", hist2);
@@ -55,7 +57,7 @@ public class InvoiceController {
     }
 
     
-    @RequestMapping(value = "/AddInvoice",method=RequestMethod.POST)
+    @RequestMapping(value = "/addInvoice",method=RequestMethod.POST)
     public String addPrductToDB(Invoice inv, Model m, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         DaoInvoice dao = (DaoInvoice) FactoryDao.getDao(Invoice.class);
         dao.update(inv);
@@ -67,7 +69,17 @@ public class InvoiceController {
     //
     /////////////////////////////////////////
     
+    @ModelAttribute(value = "lSupplier")
+    public List<Supplier> lSupplier(){
+        DaoGeneric dao = FactoryDao.getDao(Supplier.class);
+        return dao.selectAll("Supplier");
+    }
     
+    @ModelAttribute(value = "lProduct")
+    public List<Product> listeProduct(){
+        DaoGeneric dao = FactoryDao.getDao(Product.class);
+        return dao.selectAll("Product");
+    }
             
     @ModelAttribute(value = "lProduitHorsStock")
     public List<Product> lProduitHorsStock() {

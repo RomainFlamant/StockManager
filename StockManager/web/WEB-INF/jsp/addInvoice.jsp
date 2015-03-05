@@ -1,9 +1,12 @@
 <%-- 
-    Document   : addCommandes
-    Created on : 5 mars 2015, 10:38:17
-    Author     : mou_h_000
+    Document   : addEmployee
+    Created on : 3 mars 2015, 15:22:26
+    Author     : Romain
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="includes/header.jsp" %>
 <%@include file="includes/menu.jsp" %>
 
@@ -14,19 +17,16 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Ajout Commande</a></li>
+        <li><a href="#">Ajout d'une facture</a></li>
     </ul>   
-    <c:if test="${ResultForm == valeur}">
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Ajout réussi</strong>
+    <form:form cssClass="form-horizontal" action="" method="post" modelAttribute="invoice">
+        <div class="form-actions" style="margin-bottom: 20px;">
+            <h1>Ajout facture.<br><br>Merci de rentrer toutes les informations suivantes.</h1>
         </div>
-    </c:if>
-    <form:form cssClass="form-horizontal" action="" method="post" modelAttribute="commandes">
-        <div class="control-group">
-            <form:label cssClass="control-label" path="customer.nameCustomer">Client :</form:label>
+       <div class="control-group">
+            <form:label cssClass="control-label" path="supplier.nameSupplier">Fournisseur :</form:label>
                 <div class="controls">
-                <form:select items="${lCustomer}" itemLabel="nameCustomer" itemValue="idCustomer" path="customer.idCustomer"/>
+                <form:select items="${lSupplier}" itemLabel="nameSupplier" itemValue="idSupplier" path="supplier.idSupplier"/>
             </div>
         </div>
         <div class="control-group">
@@ -44,7 +44,7 @@
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
-            <button type="reset" class="btn">Anuler</button>
+           <a href="AllSupplier.stk" class="btn">Anuler</a>
         </div>
     </form:form>
 </div>
