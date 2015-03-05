@@ -46,7 +46,7 @@ public class InvoiceController {
     /////////////////////////////////////////
     //AJOUT DES Invoice
     @RequestMapping(value = "/AddInvoice",method=RequestMethod.GET)
-    public String addProduct(Model m,@RequestParam("history") String hist1, @RequestParam("history2") String hist2, @RequestParam("history3") String hist3) {
+    public String addProduct(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("history", hist1);
         m.addAttribute("history2", hist2);
         m.addAttribute("history3", hist3);
@@ -56,7 +56,7 @@ public class InvoiceController {
 
     
     @RequestMapping(value = "/AddInvoice",method=RequestMethod.POST)
-    public String addPrductToDB(Invoice inv, Model m, @RequestParam("history") String hist1, @RequestParam("history2") String hist2, @RequestParam("history3") String hist3) {
+    public String addPrductToDB(Invoice inv, Model m, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         DaoInvoice dao = (DaoInvoice) FactoryDao.getDao(Invoice.class);
         dao.update(inv);
         if (!hist1.equals(""))

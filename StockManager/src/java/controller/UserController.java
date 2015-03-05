@@ -76,13 +76,16 @@ public class UserController {
     //AJOUT EMPLOYEE
     //
     @RequestMapping(value = "/AddEmployee", method = RequestMethod.GET)
-    public String addEmployee(Model m) {
+    public String addEmployee(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("employee", new Employee());
+        m.addAttribute("history", hist1);
+        m.addAttribute("history2", hist2);
+        m.addAttribute("history3", hist3);
         return "addEmployee";
     }
 
     @RequestMapping(value = "/AddEmployee", method = RequestMethod.POST)
-    public String addEmployeeToDB(Employee emp, Model m) {
+    public String addEmployeeToDB(Employee emp, Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         DaoEmployee dao = (DaoEmployee) FactoryDao.getDao(Employee.class);
         emp.setIsActive(1);
         dao.insert(emp);

@@ -44,17 +44,23 @@ public class CustomerController {
     /////////////////////////////////////////
     //AJOUT DES CLIENTS
     @RequestMapping(value = "/AddClients",method=RequestMethod.GET)
-    public String addCustomer(Model m) {
+    public String addCustomer(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("customer", new Customer());
+        m.addAttribute("history", hist1);
+        m.addAttribute("history2", hist2);
+        m.addAttribute("history3", hist3);
         return "addCustomer";
     }
 
     
     @RequestMapping(value = "/AddClients",method=RequestMethod.POST)
-    public String addCustomerToDB(Customer cust, Model m) {
+    public String addCustomerToDB(Customer cust, Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         DaoCustomer dao = (DaoCustomer) FactoryDao.getDao(Customer.class);
         dao.update(cust);
-        return "redirect:/AllCustomers.stk";
+        if (!hist1.equals(""))
+            return "redirect:/" + hist1 + ".stk?history="+ hist2 +"&history2=" + hist3 + "&history3=";
+        else
+            return "redirect:/AllCustomers.stk";
     }
     //
     /////////////////////////////////////////
