@@ -5,7 +5,10 @@
  */
 package dao;
 
+import hibernate.HibernateUtil;
+import model.Customer;
 import model.Product;
+import org.hibernate.Session;
 
 /**
  *
@@ -17,5 +20,10 @@ public class DaoProduct extends DaoGeneric<Product>{
         super();
     }
     
+    public Product getProductWithId(Long id) {
+        Session session = HibernateUtil.getSession();
+        Product pro = (Product) session.load(Product.class, id);
+        return pro;
+    }
     
 }

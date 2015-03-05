@@ -17,7 +17,7 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Suppression d'un fournisseur</a></li>
+        <li><a href="#">Suppression d'un produit</a></li>
     </ul>   
     <c:set var="valeur" scope="session" value="success"/>
     <c:if test="${ResultForm == valeur}">
@@ -26,19 +26,26 @@
             <strong>Ajout réussi</strong>
         </div>
     </c:if>
-    <form:form cssClass="form-horizontal"  method="post" modelAttribute="supplier">
+    <form:form cssClass="form-horizontal"  method="post" modelAttribute="product">
         <div class="form-actions warning" style="margin-bottom: 20px;">
             <h1>Êtes-vous sûr de vouloir le supprimer ?</h1>
         </div>
         <div class="control-group hidden">
-            <form:label cssClass="control-label" path="idSupplier">id :</form:label>
+            <form:label cssClass="control-label" path="category">Categorie :</form:label>
                 <div class="controls">
-                <form:input cssClass="span6 typeahead"  path="idSupplier"/>
+                <form:select items="${lCateg}" itemLabel="nameCategory" itemValue="idCategory" path="category.idCategory"/>
+                <a href="AddCategori.stk" class="btn btn-primary">Ajouter une categorie</a>
+            </div>
+        </div>
+        <div class="control-group hidden">
+            <form:label cssClass="control-label" path="idProduct">id :</form:label>
+                <div class="controls">
+                <form:input cssClass="span6 typeahead"  path="idProduct"/>
             </div>
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-danger">Supprimer</button>
-            <a href="AllSupplier.stk" class="btn">Anuler</a>
+            <a href="AllProduct.stk" class="btn">Anuler</a>
         </div>
     </form:form>
 </div>

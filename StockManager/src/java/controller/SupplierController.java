@@ -40,7 +40,7 @@ public class SupplierController {
     
       /////////////////////////////////////////
     //LISTE DES FOURNISSUERS
-    @RequestMapping("/listSupplier")
+    @RequestMapping("/AllSupplier")
     public String allEmployee(Model m) {
         DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
         List<Metier> l = dao.selectAll("Supplier");
