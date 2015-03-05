@@ -28,7 +28,7 @@
         <table class="table table-striped table-bordered bootstrap-datatable datatable">
             <thead>
                 <tr>
-                    <th>Id client</th>
+                    <th>#</th>
                     <th>Nom</th>
                     <th>Siret</th>
                     <th>Type</th>

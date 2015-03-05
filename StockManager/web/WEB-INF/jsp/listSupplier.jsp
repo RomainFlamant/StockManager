@@ -46,7 +46,7 @@
                             ${element.addressSupplier} ${element.cpsupplier} ${element.villeSupplier} 
                         </td>
                         <td class="center">
-                            <a class="btn btn-info" href="ModifClient.stk?id=${element.idSupplier}">
+                            <a class="btn btn-info" href="upSupplier.stk?id=${element.idSupplier}">
                                 <i class="halflings-icon white edit"></i>  
                             </a>
                             <a class="btn btn-danger" href="deleteSupplier.stk?id=${element.idSupplier}">

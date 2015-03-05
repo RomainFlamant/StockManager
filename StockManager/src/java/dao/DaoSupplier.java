@@ -26,5 +26,6 @@ public class DaoSupplier extends DaoGeneric<Supplier>{
         Supplier cust = (Supplier) session.load(Supplier.class, id);
         return cust;
     }
+
     
 }

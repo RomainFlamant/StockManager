@@ -5,11 +5,9 @@
  */
 package controller;
 
-import dao.DaoCustomer;
 import dao.DaoSupplier;
 import factory.FactoryDao;
 import java.util.List;
-import model.Customer;
 import model.Metier;
 import model.Supplier;
 import org.springframework.stereotype.Controller;
@@ -67,6 +65,27 @@ public class SupplierController {
     public String supSupplier(Supplier cust, Model m) {
         DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
         dao.delete(cust);
+        return "redirect:/listSupplier.stk";
+    }
+    
+        //
+    /////////////////////////////////////////
+    
+    /////////////////////////////////////////
+    //Modif fournisseur
+    @RequestMapping(value = "/upSupplier",method=RequestMethod.GET)
+    public String upCustomer(@RequestParam("id") Long id,Model m) {
+        DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
+        Supplier cust = dao.getSupplierWithId(id);
+        m.addAttribute("supplier", cust);
+        return "upSupplier";
+    }
+
+    
+    @RequestMapping(value = "/upSupplier",method=RequestMethod.POST)
+    public String upCustomerToDB(Supplier cust, Model m) {
+        DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
+        dao.update(cust);
         return "redirect:/listSupplier.stk";
     }
 }
