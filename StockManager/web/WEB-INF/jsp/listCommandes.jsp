@@ -38,7 +38,6 @@
                 </c:if>
                 <c:forEach items="${myList}" var="element"> 
                     <tr>
-                        
                         <td class="center">${element.quantityOrder}</td>
                         <td class="center">${element.dateOrders}</td>
                         <td class="center">
