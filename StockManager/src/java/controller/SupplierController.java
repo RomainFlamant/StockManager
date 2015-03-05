@@ -25,17 +25,23 @@ public class SupplierController {
     
     
      @RequestMapping(value = "/addSupplier",method=RequestMethod.GET)
-    public String addSupplier(Model m) {
+    public String addSupplier(Model m, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("supplier", new Supplier());
+        m.addAttribute("history", hist1);
+        m.addAttribute("history2", hist2);
+        m.addAttribute("history3", hist3);
         return "addSupplier";
     }
 
     
     @RequestMapping(value = "/addSupplier",method=RequestMethod.POST)
-    public String addSupplier(Supplier cust, Model m) {
+    public String addSupplier(Supplier cust, Model m, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
         dao.update(cust);
-        return "redirect:/AllSupplier.stk";
+        if (!hist1.equals(""))
+            return "redirect:/" + hist1 + ".stk?history="+ hist2 +"&history2=" + hist3 + "&history3=";
+        else
+            return "redirect:/AllSupplier.stk";
     }
     
       /////////////////////////////////////////

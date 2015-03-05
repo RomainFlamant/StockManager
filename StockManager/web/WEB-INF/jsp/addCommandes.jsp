@@ -33,6 +33,7 @@
         <form:label cssClass="control-label" path="product.nameProduct">Produit :</form:label>
             <div class="controls">
         <form:select items="${lProduct}" itemLabel="nameProduct" itemValue="idProduct" path="product.idProduct"/>
+        <a href="AddProduit.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un Produit</a>
         </div>
         </div> 
         <div class="control-group">

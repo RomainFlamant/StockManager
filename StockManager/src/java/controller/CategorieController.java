@@ -34,7 +34,7 @@ public class CategorieController {
     /////////////////////////////////////////
     //AJOUT DES Categori
     @RequestMapping(value = "/AddCategori",method=RequestMethod.GET)
-    public String addProduct(Model m,@RequestParam("history") String hist1, @RequestParam("history2") String hist2, @RequestParam("history3") String hist3) {
+    public String addProduct(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("history", hist1);
         m.addAttribute("history2", hist2);
         m.addAttribute("history3", hist3);
@@ -44,7 +44,7 @@ public class CategorieController {
 
     
     @RequestMapping(value = "/AddCategori",method=RequestMethod.POST)
-    public String addPrductToDB(Category categ, Model m, @RequestParam("history") String hist1, @RequestParam("history2") String hist2, @RequestParam("history3") String hist3) {
+    public String addPrductToDB(Category categ, Model m, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         DaoCategory dao = (DaoCategory) FactoryDao.getDao(Category.class);
         dao.update(categ);
         if (!hist1.equals(""))
