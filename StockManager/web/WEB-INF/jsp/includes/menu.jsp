@@ -17,7 +17,7 @@
                     <li><a href="index.stk"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Accueil</span></a></li>	
                     <li><a href="AllProduct.stk"><i class="icon-envelope"></i><span class="hidden-tablet"> Produit</span></a></li>
                     <li><a href="AllCustomers.stk"><i class="icon-tasks"></i><span class="hidden-tablet"> Clients</span></a></li>
-                    <li><a href="#"><i class="icon-dashboard"></i><span class="hidden-tablet"> Commande</span></a></li>
+                    <li><a href="listCommandes.stk"><i class="icon-dashboard"></i><span class="hidden-tablet"> Commande</span></a></li>
                     <li><a href="listSupplier.stk"><i class="icon-eye-open"></i><span class="hidden-tablet"> Fournisseur</span></a></li>
                     <li><a href="#"><i class="icon-dashboard"></i><span class="hidden-tablet"> Facturation</span></a></li>
                     <li>

@@ -14,6 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import model.Customer;
 import model.Employee;
+import model.Metier;
 import model.Orders;
 import model.OrdersId;
 import model.Product;
@@ -60,5 +61,13 @@ public class CommandesController {
     public List<Product> listeProduct(){
         DaoGeneric dao = FactoryDao.getDao(Product.class);
         return dao.selectAll("Product");
+    }
+    
+    @RequestMapping("/listCommandes")
+    public String listCommande(Model m) {
+        DaoOrders dao =(DaoOrders)FactoryDao.getDao(Orders.class);
+        List<Metier> l = dao.selectAll("Orders");
+        m.addAttribute("myList", l);
+        return "listCommandes";
     }
 }
