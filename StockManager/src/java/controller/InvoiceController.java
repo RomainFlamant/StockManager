@@ -5,23 +5,19 @@
  */
 package controller;
 
-import dao.DaoCategory;
 import dao.DaoGeneric;
 import dao.DaoInvoice;
 import dao.DaoProduct;
 import factory.FactoryDao;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import model.Category;
 import model.Employee;
 import model.Invoice;
 import model.Metier;
 import model.Product;
 import model.Supplier;
-import org.hibernate.mapping.Collection;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,7 +37,7 @@ public class InvoiceController {
     //LISTE DES INVOICE
     @RequestMapping("/AllInvoice")
     public String allEmployee(Model m) {
-        DaoInvoice dao = (DaoInvoice) FactoryDao.getDao(Invoice.class);
+        DaoGeneric dao = FactoryDao.getDao(Invoice.class);
         List<Metier> l = dao.selectAll("Invoice");
         m.addAttribute("myList", l);
         return "listInvoice";

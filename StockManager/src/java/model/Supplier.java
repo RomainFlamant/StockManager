@@ -1,5 +1,5 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,12 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="supplier"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
-public class Supplier  extends Metier implements java.io.Serializable {
+public class Supplier extends Metier implements java.io.Serializable {
 
 
-     private long idSupplier;
+     private Long idSupplier;
      private String nameSupplier;
      private String siretSupplier;
      private String addressSupplier;
@@ -33,12 +35,7 @@ public class Supplier  extends Metier implements java.io.Serializable {
     public Supplier() {
     }
 
-	
-    public Supplier(long idSupplier) {
-        this.idSupplier = idSupplier;
-    }
-    public Supplier(long idSupplier, String nameSupplier, String siretSupplier, String addressSupplier, String villeSupplier, Long cpsupplier, Set<Product> products, Set<Invoice> invoices) {
-       this.idSupplier = idSupplier;
+    public Supplier(String nameSupplier, String siretSupplier, String addressSupplier, String villeSupplier, Long cpsupplier,  Set<Product> products, Set<Invoice> invoices) {
        this.nameSupplier = nameSupplier;
        this.siretSupplier = siretSupplier;
        this.addressSupplier = addressSupplier;
@@ -48,15 +45,15 @@ public class Supplier  extends Metier implements java.io.Serializable {
        this.invoices = invoices;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="IdSupplier", unique=true, nullable=false)
-    public long getIdSupplier() {
+    public Long getIdSupplier() {
         return this.idSupplier;
     }
     
-    public void setIdSupplier(long idSupplier) {
+    public void setIdSupplier(Long idSupplier) {
         this.idSupplier = idSupplier;
     }
 
@@ -110,16 +107,16 @@ public class Supplier  extends Metier implements java.io.Serializable {
         this.cpsupplier = cpsupplier;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="supplier")
-    public Set<Product> getProducts() {
+@OneToMany(fetch=FetchType.EAGER, mappedBy="supplier")
+    public  Set<Product> getProducts() {
         return this.products;
     }
     
-    public void setProducts(Set<Product> products) {
+    public void setProducts( Set<Product> products) {
         this.products = products;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="supplier")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="supplier")
     public Set<Invoice> getInvoices() {
         return this.invoices;
     }

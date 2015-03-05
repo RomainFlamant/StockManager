@@ -1,11 +1,13 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,12 +20,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="invoice"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
-public class Invoice  extends Metier implements java.io.Serializable {
+public class Invoice extends Metier implements java.io.Serializable {
 
 
-     private long numInvoice;
+     private Long numInvoice;
      private Employee employee;
      private Product product;
      private Supplier supplier;
@@ -34,14 +36,12 @@ public class Invoice  extends Metier implements java.io.Serializable {
     }
 
 	
-    public Invoice(long numInvoice, Employee employee, Product product, Supplier supplier) {
-        this.numInvoice = numInvoice;
+    public Invoice(Employee employee, Product product, Supplier supplier) {
         this.employee = employee;
         this.product = product;
         this.supplier = supplier;
     }
-    public Invoice(long numInvoice, Employee employee, Product product, Supplier supplier, Long quantityInvoice, Date dateInvoice) {
-       this.numInvoice = numInvoice;
+    public Invoice(Employee employee, Product product, Supplier supplier, Long quantityInvoice, Date dateInvoice) {
        this.employee = employee;
        this.product = product;
        this.supplier = supplier;
@@ -49,19 +49,19 @@ public class Invoice  extends Metier implements java.io.Serializable {
        this.dateInvoice = dateInvoice;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="NumInvoice", unique=true, nullable=false)
-    public long getNumInvoice() {
+    public Long getNumInvoice() {
         return this.numInvoice;
     }
     
-    public void setNumInvoice(long numInvoice) {
+    public void setNumInvoice(Long numInvoice) {
         this.numInvoice = numInvoice;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="IdEmployee", nullable=false)
     public Employee getEmployee() {
         return this.employee;

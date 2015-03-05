@@ -1,5 +1,5 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,12 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="customer"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
-public class Customer  extends Metier implements java.io.Serializable {
+public class Customer extends Metier implements java.io.Serializable {
 
 
-     private long idCustomer;
+     private Long idCustomer;
      private String nameCustomer;
      private String siretCustomer;
      private String typeCustomer;
@@ -33,12 +35,7 @@ public class Customer  extends Metier implements java.io.Serializable {
     public Customer() {
     }
 
-	
-    public Customer(long idCustomer) {
-        this.idCustomer = idCustomer;
-    }
-    public Customer(long idCustomer, String nameCustomer, String siretCustomer, String typeCustomer, String adressCustomer, String villeCustomer, Long cpcustomer, Set<Orders> orderses) {
-       this.idCustomer = idCustomer;
+    public Customer(String nameCustomer, String siretCustomer, String typeCustomer, String adressCustomer, String villeCustomer, Long cpcustomer, Set<Orders> orderses) {
        this.nameCustomer = nameCustomer;
        this.siretCustomer = siretCustomer;
        this.typeCustomer = typeCustomer;
@@ -48,20 +45,20 @@ public class Customer  extends Metier implements java.io.Serializable {
        this.orderses = orderses;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="IdCustomer", unique=true, nullable=false)
-    public long getIdCustomer() {
+    public Long getIdCustomer() {
         return this.idCustomer;
     }
     
-    public void setIdCustomer(long idCustomer) {
+    public void setIdCustomer(Long idCustomer) {
         this.idCustomer = idCustomer;
     }
 
     
-    @Column(name="NameCustomer")
+    @Column(name="NameCustomer", length=65535)
     public String getNameCustomer() {
         return this.nameCustomer;
     }

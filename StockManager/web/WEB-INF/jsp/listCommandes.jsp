@@ -30,25 +30,14 @@
                 <tr>
                     <th>Num Commande</th>
                     <th>Client</th>
-                    <th>Produit Id</th>
-                    <th>Produit</th>
-                    <th>Quantité</th>
                     <th>Date Commande</th>
                 </tr>
             </thead>   
             <tbody>
-                <c:if test="${myList.isEmpty()}">
-                    <tr>
-                        <td colspan="5">Aucun resultat trouvé</td>
-                    </tr>
-                </c:if>
                 <c:forEach items="${myList}" var="element"> 
                     <tr>
                         <td class="center">${element.numOrder}</td>
                         <td class="center">${element.customer.idCustomer} : ${element.customer.nameCustomer}</td>
-                        <td class="center">${element.product.idProduct}</td>
-                        <td class="center">${element.product.nameProduct}</td>
-                        <td class="center">${element.quantityOrder}</td>
                         <td class="center">${element.dateOrders}</td>
                     </tr>
                 </c:forEach>

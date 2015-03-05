@@ -19,13 +19,6 @@
         </li>
         <li><a href="#">Suppression d'un fournisseur</a></li>
     </ul>   
-    <c:set var="valeur" scope="session" value="success"/>
-    <c:if test="${ResultForm == valeur}">
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Ajout réussi</strong>
-        </div>
-    </c:if>
     <form:form cssClass="form-horizontal"  method="post" modelAttribute="supplier">
         <div class="form-actions warning" style="margin-bottom: 20px;">
             <h1>Êtes-vous sûr de vouloir le supprimer ?</h1>

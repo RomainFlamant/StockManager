@@ -60,7 +60,7 @@
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Enregistrer</button>
-          <a href="listSupplier.stk" class="btn">Anuler</a>
+          <a href="AllSupplier.stk" class="btn">Anuler</a>
         </div>
     </form:form>
 </div>

@@ -10,15 +10,19 @@ import dao.DaoGeneric;
 import dao.DaoOrders;
 import dao.DaoProduct;
 import factory.FactoryDao;
+import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.criteria.Order;
 import javax.servlet.http.HttpServletRequest;
 import model.Customer;
 import model.Employee;
 import model.Metier;
+import model.Orderproduct;
 import model.Orders;
 import model.Product;
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,27 +49,40 @@ public class CommandesController {
     }
     
     @RequestMapping(value = "/addCommandes",method = RequestMethod.POST)
-    public String ajoutCommande(Orders order, HttpServletRequest request,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3){
+    public String ajoutCommande(Model model,Orders order, HttpServletRequest request,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3){
         DaoOrders dao =(DaoOrders) FactoryDao.getDao(Orders.class);
         Employee emp = (Employee) request.getSession().getAttribute("userConnecte");
         order.setEmployee(emp);
         Date d = new Date();
         order.setDateOrders(d);
-        DaoProduct daoPro = (DaoProduct) FactoryDao.getDao(Product.class);
-        Product pro = daoPro.getProductWithId(order.getProduct().getIdProduct());
-        int stock  = pro.getStockProduct();
-        if ((stock - order.getQuantityOrder())>= 0){
-            int result = (int) (stock - order.getQuantityOrder());
-            pro.setStockProduct(result);
-            daoPro.update(pro);
-            dao.insert(order);
+        dao.insert(order);
+        List<Orders> l = new ArrayList<Orders>();
+        Session s = HibernateUtil.getSession();
+        s.merge(order);
+        s.refresh(order);
+        l.add(order);
+        model.addAttribute("ordp", new Orderproduct());
+        model.addAttribute("lOrder", l);
+        return "addCommandes_1";
+    }
+    
+    
+    @RequestMapping(value = "/addProducttoCmd",method = RequestMethod.POST)
+    public String addProducttoCmd(Model model,Orderproduct order, HttpServletRequest request,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3){
+        DaoOrders dao =(DaoOrders) FactoryDao.getDao(Orders.class);
+        DaoProduct daoP =(DaoProduct) FactoryDao.getDao(Product.class);
+        Product p = daoP.getProductWithId(order.getProduct().getIdProduct());
+        int stock = p.getStockProduct();
+        int result = (int) (stock - order.getQuantityOrder());
+        if ((stock - order.getQuantityOrder()) >= 0)
+            p.setStockProduct(result);
+        else{
+            p.setStockProduct(0);
+            order.setQuantityOrder(Long.parseLong(""+stock));
         }
-        else
-            return "redirect:/addCommandes.stk";
-        if (!hist1.equals(""))
-            return "redirect:/" + hist1 + ".stk?history="+ hist2 +"&history2=" + hist3 + "&history3=";
-        else
-            return "redirect:/listCommandes.stk";
+        daoP.update(p);
+        dao.insert(order);
+        return "redirect:/listCommandes.stk";
     }
     
     @ModelAttribute(value = "lCustomer")

@@ -1,5 +1,5 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,12 +20,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="product"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
-public class Product  extends Metier implements java.io.Serializable {
+public class Product extends Metier implements java.io.Serializable {
 
 
-     private long idProduct;
+     private Long idProduct;
      private Category category;
      private Supplier supplier;
      private String nameProduct;
@@ -32,20 +34,18 @@ public class Product  extends Metier implements java.io.Serializable {
      private Integer maxStockProduct;
      private Integer minStockProduct;
      private Integer stockProduct;
-     private Set<Orders> orderses = new HashSet(0);
+     private  Set<Orderproduct> orderproducts = new HashSet(0);
      private Set<Invoice> invoices = new HashSet(0);
 
     public Product() {
     }
 
 	
-    public Product(long idProduct, Category category, Supplier supplier) {
-        this.idProduct = idProduct;
+    public Product(Category category, Supplier supplier) {
         this.category = category;
         this.supplier = supplier;
     }
-    public Product(long idProduct, Category category, Supplier supplier, String nameProduct, String descriptifProduct, Float priceProduct, Integer maxStockProduct, Integer minStockProduct, Integer stockProduct, Set<Orders> orderses, Set<Invoice> invoices) {
-       this.idProduct = idProduct;
+    public Product(Category category, Supplier supplier, String nameProduct, String descriptifProduct, Float priceProduct, Integer maxStockProduct, Integer minStockProduct, Integer stockProduct,  Set<Orderproduct> orderproducts, Set<Invoice> invoices) {
        this.category = category;
        this.supplier = supplier;
        this.nameProduct = nameProduct;
@@ -54,19 +54,19 @@ public class Product  extends Metier implements java.io.Serializable {
        this.maxStockProduct = maxStockProduct;
        this.minStockProduct = minStockProduct;
        this.stockProduct = stockProduct;
-       this.orderses = orderses;
+       this.orderproducts = orderproducts;
        this.invoices = invoices;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="IdProduct", unique=true, nullable=false)
-    public long getIdProduct() {
+    public Long getIdProduct() {
         return this.idProduct;
     }
     
-    public void setIdProduct(long idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 
@@ -151,12 +151,12 @@ public class Product  extends Metier implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="product")
-    public Set<Orders> getOrderses() {
-        return this.orderses;
+    public  Set<Orderproduct> getOrderproducts() {
+        return this.orderproducts;
     }
     
-    public void setOrderses(Set<Orders> orderses) {
-        this.orderses = orderses;
+    public void setOrderproducts( Set<Orderproduct> orderproducts) {
+        this.orderproducts = orderproducts;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="product")

@@ -1,14 +1,19 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,46 +23,43 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="orders"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
-public class Orders extends Metier  implements java.io.Serializable {
+public class Orders extends Metier implements java.io.Serializable {
 
 
-     private long numOrder;
+     private Long numOrder;
      private Customer customer;
      private Employee employee;
-     private Product product;
-     private Long quantityOrder;
+     
      private Date dateOrders;
+     private  Set<Orderproduct> orderproducts = new HashSet(0);
 
     public Orders() {
     }
 
 	
-    public Orders(long numOrder, Customer customer, Employee employee, Product product) {
-        this.numOrder = numOrder;
+    public Orders(Customer customer, Employee employee) {
         this.customer = customer;
         this.employee = employee;
-        this.product = product;
     }
-    public Orders(long numOrder, Customer customer, Employee employee, Product product, Long quantityOrder, Date dateOrders) {
-       this.numOrder = numOrder;
+    public Orders(Customer customer, Employee employee, Date dateOrders,  Set<Orderproduct> orderproducts) {
        this.customer = customer;
        this.employee = employee;
-       this.product = product;
-       this.quantityOrder = quantityOrder;
+       
        this.dateOrders = dateOrders;
+       this.orderproducts = orderproducts;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="NumOrder", unique=true, nullable=false)
-    public long getNumOrder() {
+    public Long getNumOrder() {
         return this.numOrder;
     }
     
-    public void setNumOrder(long numOrder) {
+    public void setNumOrder(Long numOrder) {
         this.numOrder = numOrder;
     }
 
@@ -71,7 +73,7 @@ public class Orders extends Metier  implements java.io.Serializable {
         this.customer = customer;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="IdEmployee", nullable=false)
     public Employee getEmployee() {
         return this.employee;
@@ -81,25 +83,8 @@ public class Orders extends Metier  implements java.io.Serializable {
         this.employee = employee;
     }
 
-@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="IdProduct", nullable=false)
-    public Product getProduct() {
-        return this.product;
-    }
     
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     
-    @Column(name="QuantityOrder")
-    public Long getQuantityOrder() {
-        return this.quantityOrder;
-    }
-    
-    public void setQuantityOrder(Long quantityOrder) {
-        this.quantityOrder = quantityOrder;
-    }
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="DateOrders", length=19)
@@ -109,6 +94,15 @@ public class Orders extends Metier  implements java.io.Serializable {
     
     public void setDateOrders(Date dateOrders) {
         this.dateOrders = dateOrders;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="orders")
+    public  Set<Orderproduct> getOrderproducts() {
+        return this.orderproducts;
+    }
+    
+    public void setOrderproducts( Set<Orderproduct> orderproducts) {
+        this.orderproducts = orderproducts;
     }
 
 

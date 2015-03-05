@@ -27,20 +27,7 @@
             <form:label cssClass="control-label" path="customer.nameCustomer">Client :</form:label>
                 <div class="controls">
                 <form:select items="${lCustomer}" itemLabel="nameCustomer" itemValue="idCustomer" path="customer.idCustomer"/>
-                <a href="AddClients.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un client</a>
-            </div>
-        </div>
-        <div class="control-group">
-            <form:label cssClass="control-label" path="product.nameProduct">Produit :</form:label>
-                <div class="controls">
-                <form:select items="${lProduct}" itemLabel="nameProduct" itemValue="idProduct" path="product.idProduct"/>
-                <a href="AddProduit.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un Produit</a>
-            </div>
-        </div> 
-        <div class="control-group">
-            <form:label cssClass="control-label" path="quantityOrder">Quantité :</form:label>
-                <div class="controls">
-                <form:input cssClass="span6 typeahead"  path="quantityOrder"/>
+                <a href="AddClients.stk?history=addCommandes&history2=&history3=" class="btn btn-primary">Ajouter un client</a>
             </div>
         </div>
         <div class="form-actions">

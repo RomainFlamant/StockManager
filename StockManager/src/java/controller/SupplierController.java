@@ -74,8 +74,9 @@ public class SupplierController {
     @RequestMapping(value = "/deleteSupplier",method=RequestMethod.POST)
     public String supSupplier(Supplier cust, Model m) {
         DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
-        dao.delete(cust);
-        return "redirect:/listSupplier.stk";
+        Supplier s = dao.getSupplierWithId(cust.getIdSupplier());
+        dao.delete(s);
+        return "redirect:/AllSupplier.stk";
     }
     
         //
@@ -96,7 +97,7 @@ public class SupplierController {
     public String upCustomerToDB(Supplier cust, Model m) {
         DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
         dao.update(cust);
-        return "redirect:/listSupplier.stk";
+        return "redirect:/AllSupplier.stk";
     }
     
     

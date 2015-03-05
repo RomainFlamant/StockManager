@@ -1,5 +1,5 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,12 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="category"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
 public class Category extends Metier implements java.io.Serializable {
 
 
-     private long idCategory;
+     private Long idCategory;
      private String nameCategory;
      private String descriptionCategory;
      private Set<Product> products = new HashSet(0);
@@ -29,26 +31,21 @@ public class Category extends Metier implements java.io.Serializable {
     public Category() {
     }
 
-	
-    public Category(long idCategory) {
-        this.idCategory = idCategory;
-    }
-    public Category(long idCategory, String nameCategory, String descriptionCategory, Set<Product> products) {
-       this.idCategory = idCategory;
+    public Category(String nameCategory, String descriptionCategory,  Set<Product> products) {
        this.nameCategory = nameCategory;
        this.descriptionCategory = descriptionCategory;
        this.products = products;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="IdCategory", unique=true, nullable=false)
-    public long getIdCategory() {
+    public Long getIdCategory() {
         return this.idCategory;
     }
     
-    public void setIdCategory(long idCategory) {
+    public void setIdCategory(Long idCategory) {
         this.idCategory = idCategory;
     }
 
@@ -73,11 +70,11 @@ public class Category extends Metier implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="category")
-    public Set<Product> getProducts() {
+    public  Set<Product> getProducts() {
         return this.products;
     }
     
-    public void setProducts(Set<Product> products) {
+    public void setProducts( Set<Product> products) {
         this.products = products;
     }
 

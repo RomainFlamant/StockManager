@@ -1,5 +1,5 @@
 package model;
-// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 20:30:42 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,12 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="employee"
-    ,catalog="stockmanager"
+    ,catalog="stockmanager2"
 )
-public class Employee  extends Metier implements java.io.Serializable {
+public class Employee extends Metier implements java.io.Serializable {
 
 
-     private long idEmployee;
+     private Long idEmployee;
      private String nameEmployee;
      private String firstNameEmployee;
      private String emailEmployee;
@@ -33,12 +35,7 @@ public class Employee  extends Metier implements java.io.Serializable {
     public Employee() {
     }
 
-	
-    public Employee(long idEmployee) {
-        this.idEmployee = idEmployee;
-    }
-    public Employee(long idEmployee, String nameEmployee, String firstNameEmployee, String emailEmployee, String mdpEmployee, Integer isActive, Set<Invoice> invoices, Set<Orders> orderses) {
-       this.idEmployee = idEmployee;
+    public Employee(String nameEmployee, String firstNameEmployee, String emailEmployee, String mdpEmployee, Integer isActive, Set<Invoice> invoices, Set<Orders> orderses) {
        this.nameEmployee = nameEmployee;
        this.firstNameEmployee = firstNameEmployee;
        this.emailEmployee = emailEmployee;
@@ -48,15 +45,15 @@ public class Employee  extends Metier implements java.io.Serializable {
        this.orderses = orderses;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="IdEmployee", unique=true, nullable=false)
-    public long getIdEmployee() {
+    public Long getIdEmployee() {
         return this.idEmployee;
     }
     
-    public void setIdEmployee(long idEmployee) {
+    public void setIdEmployee(Long idEmployee) {
         this.idEmployee = idEmployee;
     }
 

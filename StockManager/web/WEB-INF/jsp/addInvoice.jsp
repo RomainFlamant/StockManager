@@ -27,14 +27,14 @@
             <form:label cssClass="control-label" path="supplier.nameSupplier">Fournisseur :</form:label>
                 <div class="controls">
                 <form:select items="${lSupplier}" itemLabel="nameSupplier" itemValue="idSupplier" path="supplier.idSupplier"/>
-                <a href="addSupplier.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un fournisseur</a>
+                <a href="addSupplier.stk?history=addInvoice&history2=&history3=" class="btn btn-primary">Ajouter un fournisseur</a>
             </div>
         </div>
         <div class="control-group">
             <form:label cssClass="control-label" path="product.nameProduct">Produit :</form:label>
                 <div class="controls">
                 <form:select items="${lProduct}" itemLabel="nameProduct" itemValue="idProduct" path="product.idProduct"/>
-                <a href="AddProduit.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un Produit</a>
+                <a href="AddProduit.stk?history=addInvoice&history2=&history3=" class="btn btn-primary">Ajouter un Produit</a>
             </div>
         </div> 
         <div class="control-group">
