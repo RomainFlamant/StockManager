@@ -54,10 +54,10 @@
                         <td class="center">${element.minStockProduct}</td>
                         <td class="center">${element.stockProduct}</td>
                         <td class="center">
-                            <a class="btn btn-info" href="ModifClient.stk?id=${element.idProduct}">
+                            <a class="btn btn-info" href="ModifProduit.stk?id=${element.idProduct}">
                                 <i class="halflings-icon white edit"></i>  
                             </a>
-                            <a class="btn btn-danger" href="SupClient.stk?id=${element.idProduct}">
+                            <a class="btn btn-danger" href="SupProduit.stk?id=${element.idProduct}">
                                 <i class="halflings-icon white trash"></i> 
                             </a>
                         </td>
