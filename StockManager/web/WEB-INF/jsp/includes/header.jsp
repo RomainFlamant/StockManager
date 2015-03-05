@@ -6,6 +6,7 @@
 
 <%@page import="model.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib  uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,14 +83,14 @@
                                     </li>
                                     <c:forEach items="${lProduitHorsStock}" var="element">
                                         <li class="warning">
-                                        <a href="#">
-                                            <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">${element.nameProduct}</span>
+                                            <a href="#">
+                                                <span class="icon red"><i class="icon-shopping-cart"></i></span>
+                                                <span class="message">${element.nameProduct}</span>
 
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
                                     </c:forEach>
-                                    
+
                                     <li class="dropdown-menu-sub-footer">
                                         <a>View all notifications</a>
                                     </li>	
