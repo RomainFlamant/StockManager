@@ -84,7 +84,7 @@
                                         <li class="warning">
                                         <a href="#">
                                             <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                            <span class="message">Produit n°${element.idProduct} : {element.idProduct}</span>
+                                            <span class="message">${element.nameProduct}</span>
 
                                         </a>
                                     </li>
