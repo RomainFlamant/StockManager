@@ -27,6 +27,7 @@
             <form:label cssClass="control-label" path="supplier.nameSupplier">Fournisseur :</form:label>
                 <div class="controls">
                 <form:select items="${lSupplier}" itemLabel="nameSupplier" itemValue="idSupplier" path="supplier.idSupplier"/>
+                <a href="addSupplier.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un fournisseur</a>
             </div>
         </div>
         <div class="control-group">
@@ -37,9 +38,9 @@
             </div>
         </div> 
         <div class="control-group">
-            <form:label cssClass="control-label" path="quantityOrder">Quantité :</form:label>
+            <form:label cssClass="control-label" path="quantityInvoice">Quantité :</form:label>
                 <div class="controls">
-                <form:input cssClass="span6 typeahead"  path="quantityOrder"/>
+                <form:input cssClass="span6 typeahead"  path="quantityInvoice"/>
             </div>
         </div>
         <div class="form-actions">

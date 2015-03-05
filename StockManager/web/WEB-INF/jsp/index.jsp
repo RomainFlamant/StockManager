@@ -19,15 +19,15 @@
             <p>Clients</p>
             <span class="badge">${clientNbr}</span>
         </a>
-        <a class="quick-button metro red span2">
+        <a href="AllInvoice.stk" class="quick-button metro red span2">
             <i class="icon-truck"></i>
             <p>Facture ce mois</p>
-            <span class="badge">46</span>
+            <span class="badge">${facturemonthNbr}</span>
         </a>
-        <a class="quick-button metro blue span2">
+        <a href="listCommandes.stk" class="quick-button metro blue span2">
             <i class="icon-shopping-cart"></i>
             <p>Commande ce mois</p>
-            <span class="badge">13</span>
+            <span class="badge">${commandemonthNbr}</span>
         </a>
         <a class="quick-button metro green span2">
             <i class="icon-retweet"></i>

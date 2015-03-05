@@ -27,6 +27,7 @@
             <form:label cssClass="control-label" path="customer.nameCustomer">Client :</form:label>
                 <div class="controls">
                 <form:select items="${lCustomer}" itemLabel="nameCustomer" itemValue="idCustomer" path="customer.idCustomer"/>
+                <a href="AddClients.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un client</a>
             </div>
         </div>
         <div class="control-group">

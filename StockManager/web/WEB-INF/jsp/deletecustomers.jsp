@@ -17,7 +17,7 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Suppression d'un employé</a></li>
+        <li><a href="#">Suppression d'un client</a></li>
     </ul>   
     <c:set var="valeur" scope="session" value="success"/>
     <c:if test="${ResultForm == valeur}">

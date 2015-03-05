@@ -85,15 +85,22 @@
                                         <li class="warning">
                                             <a href="#">
                                                 <span class="icon red"><i class="icon-shopping-cart"></i></span>
-                                                <span class="message">${element.nameProduct}</span>
+                                                <span class="message">Hors stock : ${element.nameProduct}</span>
+
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                    <c:forEach items="${lProduitSurStock}" var="element">
+                                        <li class="info">
+                                            <a href="#">
+                                                <span class="icon blue"><i class="icon-shopping-cart"></i></span>
+                                                <span class="message">Surplus : ${element.nameProduct}</span>
 
                                             </a>
                                         </li>
                                     </c:forEach>
 
-                                    <li class="dropdown-menu-sub-footer">
-                                        <a>View all notifications</a>
-                                    </li>	
+                                    	
                                 </ul>
                             </li>
 

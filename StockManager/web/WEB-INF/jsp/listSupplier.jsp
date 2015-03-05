@@ -17,7 +17,7 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Liste des clients</a></li>
+        <li><a href="#">Liste des fournisseurs</a></li>
     </ul>
     <a class="quick-button span2" href="addSupplier.stk">
         <i class="icon-group"></i>

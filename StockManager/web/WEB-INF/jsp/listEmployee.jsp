@@ -53,9 +53,6 @@
                             </c:if>    
                         </td>
                         <td class="center">
-                                <a class="btn btn-success" href="#">
-                                        <i class="halflings-icon white zoom-in"></i>  
-                                </a>
                                 <a class="btn btn-info" href="modifierEmploye.stk?id=${element.idEmployee}">
                                         <i class="halflings-icon white edit"></i>  
                                 </a>

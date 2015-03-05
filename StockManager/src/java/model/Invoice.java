@@ -71,7 +71,7 @@ public class Invoice  extends Metier implements java.io.Serializable {
         this.employee = employee;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="IdProduct", nullable=false)
     public Product getProduct() {
         return this.product;
@@ -81,7 +81,7 @@ public class Invoice  extends Metier implements java.io.Serializable {
         this.product = product;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="IdSupplier", nullable=false)
     public Supplier getSupplier() {
         return this.supplier;

@@ -70,6 +70,19 @@ public class CategorieController {
         return lp;
     }
     
+    @ModelAttribute(value = "lProduitSurStock")
+    public List<Product> lProduitSurStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMaxStockProduct() < p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
+    }
+            
     @ModelAttribute(value = "nbProduitHorsStock")
     public int nbProduitHorsStock() {
         DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
@@ -79,6 +92,8 @@ public class CategorieController {
         for (Object c : l) {
             Product p = (Product) c;
             if (p.getMinStockProduct() > p.getStockProduct() )
+                nb++;
+            if (p.getMaxStockProduct() < p.getStockProduct() )
                 nb++;
         }
         return nb;

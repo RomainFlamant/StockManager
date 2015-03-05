@@ -17,7 +17,7 @@
             <a href="index.stk">Site</a> 
             <i class="icon-angle-right"></i>
         </li>
-        <li><a href="#">Ajout d'un employé</a></li>
+        <li><a href="#">Ajout d'une catégorie</a></li>
     </ul>   
     <c:set var="valeur" scope="session" value="success"/>
     <c:if test="${ResultForm == valeur}">

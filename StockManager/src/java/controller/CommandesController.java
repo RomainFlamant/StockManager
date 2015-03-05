@@ -8,7 +8,9 @@ package controller;
 import dao.DaoEmployee;
 import dao.DaoGeneric;
 import dao.DaoOrders;
+import dao.DaoProduct;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +51,17 @@ public class CommandesController {
         order.setEmployee(emp);
         Date d = new Date();
         order.setDateOrders(d);
-        dao.insert(order);
+        DaoProduct daoPro = (DaoProduct) FactoryDao.getDao(Product.class);
+        Product pro = daoPro.getProductWithId(order.getProduct().getIdProduct());
+        int stock  = pro.getStockProduct();
+        if ((stock - order.getQuantityOrder())>= 0){
+            int result = (int) (stock - order.getQuantityOrder());
+            pro.setStockProduct(result);
+            daoPro.update(pro);
+            dao.insert(order);
+        }
+        else
+            return "redirect:/addCommandes.stk";
         if (!hist1.equals(""))
             return "redirect:/" + hist1 + ".stk?history="+ hist2 +"&history2=" + hist3 + "&history3=";
         else
@@ -73,5 +85,47 @@ public class CommandesController {
         List<Metier> l = dao.selectAll("Orders");
         m.addAttribute("myList", l);
         return "listCommandes";
+    }
+    
+    
+    @ModelAttribute(value = "lProduitHorsStock")
+    public List<Product> lProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
+    }
+    
+    @ModelAttribute(value = "nbProduitHorsStock")
+    public int nbProduitHorsStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        int nb = 0;
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMinStockProduct() > p.getStockProduct() )
+                nb++;
+            if (p.getMaxStockProduct() < p.getStockProduct() )
+                nb++;
+        }
+        return nb;
+    }
+    @ModelAttribute(value = "lProduitSurStock")
+    public List<Product> lProduitSurStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMaxStockProduct() < p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
     }
 }

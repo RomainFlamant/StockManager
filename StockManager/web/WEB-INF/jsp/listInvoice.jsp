@@ -19,7 +19,7 @@
         </li>
         <li><a href="#">Liste des facture</a></li>
     </ul>
-    <a class="quick-button span2" href="addSupplier.stk">
+    <a class="quick-button span2" href="addInvoice.stk">
         <i class="icon-group"></i>
         <p>Ajout d'une facture</p>
     </a><br/><br/><br/><br/><br/><br/>
@@ -44,14 +44,6 @@
                         <td class="center">${element.supplier.nameSupplier}</td>
                         <td class="center">${element.quantityInvoice}</td>
                         <td class="center">${element.dateInvoice}</td>
-                        <td class="center">
-                            <a class="btn btn-info" href="upSupplier.stk?id=${element.idSupplier}">
-                                <i class="halflings-icon white edit"></i>  
-                            </a>
-                            <a class="btn btn-danger" href="deleteSupplier.stk?id=${element.idSupplier}">
-                                <i class="halflings-icon white trash"></i> 
-                            </a>
-                        </td>
                     </tr>
                 </c:forEach>
             </tbody>

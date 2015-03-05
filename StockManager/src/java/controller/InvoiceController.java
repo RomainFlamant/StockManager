@@ -12,8 +12,11 @@ import dao.DaoProduct;
 import factory.FactoryDao;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import model.Category;
+import model.Employee;
 import model.Invoice;
 import model.Metier;
 import model.Product;
@@ -48,7 +51,7 @@ public class InvoiceController {
     /////////////////////////////////////////
     //AJOUT DES Invoice
     @RequestMapping(value = "/addInvoice",method=RequestMethod.GET)
-    public String addProduct(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
+    public String addinvoice(Model m,@RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
         m.addAttribute("history", hist1);
         m.addAttribute("history2", hist2);
         m.addAttribute("history3", hist3);
@@ -58,13 +61,23 @@ public class InvoiceController {
 
     
     @RequestMapping(value = "/addInvoice",method=RequestMethod.POST)
-    public String addPrductToDB(Invoice inv, Model m, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
-        DaoInvoice dao = (DaoInvoice) FactoryDao.getDao(Invoice.class);
-        dao.update(inv);
+    public String addinvoiceToDB(Invoice in, Model m, HttpServletRequest request, @RequestParam(value = "history",defaultValue = "") String hist1, @RequestParam(value = "history2",defaultValue = "") String hist2, @RequestParam(value = "history3",defaultValue = "") String hist3) {
+        DaoInvoice dao =(DaoInvoice) FactoryDao.getDao(Invoice.class);
+        Employee emp = (Employee) request.getSession().getAttribute("userConnecte");
+        in.setEmployee(emp);
+        Date d = new Date();
+        in.setDateInvoice(d);
+        DaoProduct daoPro = (DaoProduct) FactoryDao.getDao(Product.class);
+        Product pro = daoPro.getProductWithId(in.getProduct().getIdProduct());
+        int stock  = pro.getStockProduct();
+        int result = (int) (stock + in.getQuantityInvoice());
+        pro.setStockProduct(result);
+        daoPro.update(pro);
+        dao.insert(in);
         if (!hist1.equals(""))
             return "redirect:/" + hist1 + ".stk?history="+ hist2 +"&history2=" + hist3 + "&history3=";
         else
-            return "redirect:/AllProduct.stk";
+            return "redirect:/AllInvoice.stk";
     }
     //
     /////////////////////////////////////////
@@ -104,7 +117,21 @@ public class InvoiceController {
             Product p = (Product) c;
             if (p.getMinStockProduct() > p.getStockProduct() )
                 nb++;
+            if (p.getMaxStockProduct() < p.getStockProduct() )
+                nb++;
         }
         return nb;
+    }
+    @ModelAttribute(value = "lProduitSurStock")
+    public List<Product> lProduitSurStock() {
+        DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
+        List<Product> lp = new ArrayList<Product>();
+        List l = dao.selectAll("Product");
+        for (Object c : l) {
+            Product p = (Product) c;
+            if (p.getMaxStockProduct() < p.getStockProduct() )
+                lp.add(p);
+        }
+        return lp;
     }
 }
