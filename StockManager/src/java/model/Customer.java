@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="customer"
     ,catalog="stockmanager"
 )
-public class Customer extends Metier implements java.io.Serializable {
+public class Customer  extends Metier implements java.io.Serializable {
 
 
      private long idCustomer;
@@ -61,7 +61,7 @@ public class Customer extends Metier implements java.io.Serializable {
     }
 
     
-    @Column(name="NameCustomer", length=65535)
+    @Column(name="NameCustomer")
     public String getNameCustomer() {
         return this.nameCustomer;
     }
@@ -120,7 +120,7 @@ public class Customer extends Metier implements java.io.Serializable {
         this.cpcustomer = cpcustomer;
     }
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
+@OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
     public Set<Orders> getOrderses() {
         return this.orderses;
     }

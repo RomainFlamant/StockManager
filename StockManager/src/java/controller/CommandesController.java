@@ -16,7 +16,6 @@ import model.Customer;
 import model.Employee;
 import model.Metier;
 import model.Orders;
-import model.OrdersId;
 import model.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,8 +45,6 @@ public class CommandesController {
         order.setEmployee(emp);
         Date d = new Date();
         order.setDateOrders(d);
-        order.setId(new OrdersId(order.getEmployee().getIdEmployee(), order.getProduct().getIdProduct(),order.getCustomer().getIdCustomer()));
-        order.setNumOrder(Long.parseLong("3"));
         dao.insert(order);
         return "redirect:/index.stk";
     }

@@ -6,7 +6,6 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/stockmanager?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <mapping class="model.InvoiceId"/>
     <mapping class="model.Supplier"/>
     <mapping class="model.Invoice"/>
     <mapping class="model.Metier"/>
@@ -15,6 +14,5 @@
     <mapping class="model.Product"/>
     <mapping class="model.Customer"/>
     <mapping class="model.Employee"/>
-    <mapping class="model.OrdersId"/>
   </session-factory>
 </hibernate-configuration>

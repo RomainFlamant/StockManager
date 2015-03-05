@@ -1,14 +1,12 @@
 package model;
-// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,13 +20,13 @@ import javax.persistence.TemporalType;
 @Table(name="invoice"
     ,catalog="stockmanager"
 )
-public class Invoice extends Metier implements java.io.Serializable {
+public class Invoice  extends Metier implements java.io.Serializable {
 
 
-     private InvoiceId id;
+     private long numInvoice;
+     private Employee employee;
      private Product product;
      private Supplier supplier;
-     private Long numInvoice;
      private Long quantityInvoice;
      private Date dateInvoice;
 
@@ -36,36 +34,45 @@ public class Invoice extends Metier implements java.io.Serializable {
     }
 
 	
-    public Invoice(InvoiceId id, Product product, Supplier supplier) {
-        this.id = id;
+    public Invoice(long numInvoice, Employee employee, Product product, Supplier supplier) {
+        this.numInvoice = numInvoice;
+        this.employee = employee;
         this.product = product;
         this.supplier = supplier;
     }
-    public Invoice(InvoiceId id, Product product, Supplier supplier, Long numInvoice, Long quantityInvoice, Date dateInvoice) {
-       this.id = id;
+    public Invoice(long numInvoice, Employee employee, Product product, Supplier supplier, Long quantityInvoice, Date dateInvoice) {
+       this.numInvoice = numInvoice;
+       this.employee = employee;
        this.product = product;
        this.supplier = supplier;
-       this.numInvoice = numInvoice;
        this.quantityInvoice = quantityInvoice;
        this.dateInvoice = dateInvoice;
     }
    
-     @EmbeddedId
+     @Id 
 
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="idSupplier", column=@Column(name="IdSupplier", nullable=false) ), 
-        @AttributeOverride(name="idProduct", column=@Column(name="IdProduct", nullable=false) ) } )
-    public InvoiceId getId() {
-        return this.id;
+    @Column(name="NumInvoice", unique=true, nullable=false)
+    public long getNumInvoice() {
+        return this.numInvoice;
     }
     
-    public void setId(InvoiceId id) {
-        this.id = id;
+    public void setNumInvoice(long numInvoice) {
+        this.numInvoice = numInvoice;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="IdProduct", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="IdEmployee", nullable=false)
+    public Employee getEmployee() {
+        return this.employee;
+    }
+    
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="IdProduct", nullable=false)
     public Product getProduct() {
         return this.product;
     }
@@ -75,23 +82,13 @@ public class Invoice extends Metier implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="IdSupplier", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="IdSupplier", nullable=false)
     public Supplier getSupplier() {
         return this.supplier;
     }
     
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
-    }
-
-    
-    @Column(name="NumInvoice")
-    public Long getNumInvoice() {
-        return this.numInvoice;
-    }
-    
-    public void setNumInvoice(Long numInvoice) {
-        this.numInvoice = numInvoice;
     }
 
     

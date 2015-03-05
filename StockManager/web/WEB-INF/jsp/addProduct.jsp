@@ -31,6 +31,13 @@
             </div>
         </div>
         <div class="control-group">
+            <form:label cssClass="control-label" path="supplier">Fournisseur :</form:label>
+                <div class="controls">
+                <form:select items="${listSupplier}" itemLabel="nameSupplier" itemValue="idSupplier" path="supplier.idSupplier"/>
+                <a href="addSupplier.stk?history=AddProduit&history2=&history3=" class="btn btn-primary">Ajouter un Fournisseur</a>
+            </div>
+        </div>
+        <div class="control-group">
             <form:label cssClass="control-label" path="nameProduct">Nom :</form:label>
                 <div class="controls">
                 <form:input cssClass="span6 typeahead"  path="nameProduct"/>

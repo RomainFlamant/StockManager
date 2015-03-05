@@ -1,14 +1,12 @@
 package model;
-// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,14 +20,13 @@ import javax.persistence.TemporalType;
 @Table(name="orders"
     ,catalog="stockmanager"
 )
-public class Orders extends Metier implements java.io.Serializable {
+public class Orders extends Metier  implements java.io.Serializable {
 
 
-     private OrdersId id;
+     private long numOrder;
      private Customer customer;
      private Employee employee;
      private Product product;
-     private Long numOrder;
      private Long quantityOrder;
      private Date dateOrders;
 
@@ -37,39 +34,35 @@ public class Orders extends Metier implements java.io.Serializable {
     }
 
 	
-    public Orders(OrdersId id, Customer customer, Employee employee, Product product) {
-        this.id = id;
+    public Orders(long numOrder, Customer customer, Employee employee, Product product) {
+        this.numOrder = numOrder;
         this.customer = customer;
         this.employee = employee;
         this.product = product;
     }
-    public Orders(OrdersId id, Customer customer, Employee employee, Product product, Long numOrder, Long quantityOrder, Date dateOrders) {
-       this.id = id;
+    public Orders(long numOrder, Customer customer, Employee employee, Product product, Long quantityOrder, Date dateOrders) {
+       this.numOrder = numOrder;
        this.customer = customer;
        this.employee = employee;
        this.product = product;
-       this.numOrder = numOrder;
        this.quantityOrder = quantityOrder;
        this.dateOrders = dateOrders;
     }
    
-     @EmbeddedId
+     @Id 
 
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="idEmployee", column=@Column(name="IdEmployee", nullable=false) ), 
-        @AttributeOverride(name="idProduct", column=@Column(name="IdProduct", nullable=false) ), 
-        @AttributeOverride(name="idCustomer", column=@Column(name="IdCustomer", nullable=false) ) } )
-    public OrdersId getId() {
-        return this.id;
+    @Column(name="NumOrder", unique=true, nullable=false)
+    public long getNumOrder() {
+        return this.numOrder;
     }
     
-    public void setId(OrdersId id) {
-        this.id = id;
+    public void setNumOrder(long numOrder) {
+        this.numOrder = numOrder;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="IdCustomer", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="IdCustomer", nullable=false)
     public Customer getCustomer() {
         return this.customer;
     }
@@ -79,7 +72,7 @@ public class Orders extends Metier implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="IdEmployee", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="IdEmployee", nullable=false)
     public Employee getEmployee() {
         return this.employee;
     }
@@ -89,23 +82,13 @@ public class Orders extends Metier implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="IdProduct", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="IdProduct", nullable=false)
     public Product getProduct() {
         return this.product;
     }
     
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    
-    @Column(name="NumOrder")
-    public Long getNumOrder() {
-        return this.numOrder;
-    }
-    
-    public void setNumOrder(Long numOrder) {
-        this.numOrder = numOrder;
     }
 
     

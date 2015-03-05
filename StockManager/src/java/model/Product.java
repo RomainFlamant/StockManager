@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -20,11 +20,12 @@ import javax.persistence.Table;
 @Table(name="product"
     ,catalog="stockmanager"
 )
-public class Product extends Metier implements java.io.Serializable{
+public class Product  extends Metier implements java.io.Serializable {
 
 
      private long idProduct;
      private Category category;
+     private Supplier supplier;
      private String nameProduct;
      private String descriptifProduct;
      private Float priceProduct;
@@ -38,13 +39,15 @@ public class Product extends Metier implements java.io.Serializable{
     }
 
 	
-    public Product(long idProduct, Category category) {
+    public Product(long idProduct, Category category, Supplier supplier) {
         this.idProduct = idProduct;
         this.category = category;
+        this.supplier = supplier;
     }
-    public Product(long idProduct, Category category, String nameProduct, String descriptifProduct, Float priceProduct, Integer maxStockProduct, Integer minStockProduct, Integer stockProduct, Set<Orders> orderses, Set<Invoice> invoices) {
+    public Product(long idProduct, Category category, Supplier supplier, String nameProduct, String descriptifProduct, Float priceProduct, Integer maxStockProduct, Integer minStockProduct, Integer stockProduct, Set<Orders> orderses, Set<Invoice> invoices) {
        this.idProduct = idProduct;
        this.category = category;
+       this.supplier = supplier;
        this.nameProduct = nameProduct;
        this.descriptifProduct = descriptifProduct;
        this.priceProduct = priceProduct;
@@ -75,6 +78,16 @@ public class Product extends Metier implements java.io.Serializable{
     
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="IdSupplier", nullable=false)
+    public Supplier getSupplier() {
+        return this.supplier;
+    }
+    
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     
@@ -154,7 +167,6 @@ public class Product extends Metier implements java.io.Serializable{
     public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
     }
-
 
 
 

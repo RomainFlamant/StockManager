@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="employee"
     ,catalog="stockmanager"
 )
-public class Employee extends Metier implements java.io.Serializable {
+public class Employee  extends Metier implements java.io.Serializable {
 
 
      private long idEmployee;
@@ -27,6 +27,7 @@ public class Employee extends Metier implements java.io.Serializable {
      private String emailEmployee;
      private String mdpEmployee;
      private Integer isActive;
+     private Set<Invoice> invoices = new HashSet(0);
      private Set<Orders> orderses = new HashSet(0);
 
     public Employee() {
@@ -36,13 +37,14 @@ public class Employee extends Metier implements java.io.Serializable {
     public Employee(long idEmployee) {
         this.idEmployee = idEmployee;
     }
-    public Employee(long idEmployee, String nameEmployee, String firstNameEmployee, String emailEmployee, String mdpEmployee, Integer isActive, Set<Orders> orderses) {
+    public Employee(long idEmployee, String nameEmployee, String firstNameEmployee, String emailEmployee, String mdpEmployee, Integer isActive, Set<Invoice> invoices, Set<Orders> orderses) {
        this.idEmployee = idEmployee;
        this.nameEmployee = nameEmployee;
        this.firstNameEmployee = firstNameEmployee;
        this.emailEmployee = emailEmployee;
        this.mdpEmployee = mdpEmployee;
        this.isActive = isActive;
+       this.invoices = invoices;
        this.orderses = orderses;
     }
    
@@ -108,7 +110,16 @@ public class Employee extends Metier implements java.io.Serializable {
         this.isActive = isActive;
     }
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
+@OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
+    public Set<Invoice> getInvoices() {
+        return this.invoices;
+    }
+    
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="employee")
     public Set<Orders> getOrderses() {
         return this.orderses;
     }

@@ -1,5 +1,5 @@
 package model;
-// Generated 3 mars 2015 14:34:36 by Hibernate Tools 4.3.1
+// Generated 5 mars 2015 13:27:27 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="supplier"
     ,catalog="stockmanager"
 )
-public class Supplier extends Metier implements java.io.Serializable {
+public class Supplier  extends Metier implements java.io.Serializable {
 
 
      private long idSupplier;
@@ -27,6 +27,7 @@ public class Supplier extends Metier implements java.io.Serializable {
      private String addressSupplier;
      private String villeSupplier;
      private Long cpsupplier;
+     private Set<Product> products = new HashSet(0);
      private Set<Invoice> invoices = new HashSet(0);
 
     public Supplier() {
@@ -36,13 +37,14 @@ public class Supplier extends Metier implements java.io.Serializable {
     public Supplier(long idSupplier) {
         this.idSupplier = idSupplier;
     }
-    public Supplier(long idSupplier, String nameSupplier, String siretSupplier, String addressSupplier, String villeSupplier, Long cpsupplier, Set<Invoice> invoices) {
+    public Supplier(long idSupplier, String nameSupplier, String siretSupplier, String addressSupplier, String villeSupplier, Long cpsupplier, Set<Product> products, Set<Invoice> invoices) {
        this.idSupplier = idSupplier;
        this.nameSupplier = nameSupplier;
        this.siretSupplier = siretSupplier;
        this.addressSupplier = addressSupplier;
        this.villeSupplier = villeSupplier;
        this.cpsupplier = cpsupplier;
+       this.products = products;
        this.invoices = invoices;
     }
    
@@ -106,6 +108,15 @@ public class Supplier extends Metier implements java.io.Serializable {
     
     public void setCpsupplier(Long cpsupplier) {
         this.cpsupplier = cpsupplier;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="supplier")
+    public Set<Product> getProducts() {
+        return this.products;
+    }
+    
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="supplier")

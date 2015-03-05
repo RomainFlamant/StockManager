@@ -35,7 +35,7 @@ public class SupplierController {
     public String addSupplier(Supplier cust, Model m) {
         DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
         dao.update(cust);
-        return "redirect:/listSupplier.stk";
+        return "redirect:/AllSupplier.stk";
     }
     
       /////////////////////////////////////////

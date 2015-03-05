@@ -7,10 +7,14 @@ package controller;
 
 import dao.DaoCategory;
 import dao.DaoProduct;
+import dao.DaoSupplier;
 import factory.FactoryDao;
 import java.util.ArrayList;
 import java.util.List;
+import model.Category;
+import model.Metier;
 import model.Product;
+import model.Supplier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,7 +37,7 @@ public class ProductController {
     public String allEmployee(Model m) {
         DaoProduct dao = (DaoProduct) FactoryDao.getDao(Product.class);
         List l = dao.selectAll("Product");
-        m.addAttribute("myList", l);
+        m.addAttribute("myListProduct", l);
         return "listproduit";
     }
     //
@@ -107,6 +111,13 @@ public class ProductController {
     public List<Metier> lCateg() {
         DaoCategory dao = (DaoCategory) FactoryDao.getDao(Category.class);
         List<Metier> l = dao.selectAll("Category");
+        return l;
+    }
+    
+    @ModelAttribute(value = "listSupplier")
+    public List<Metier> lSupplier() {
+        DaoSupplier dao = (DaoSupplier) FactoryDao.getDao(Supplier.class);
+        List<Metier> l = dao.selectAll("Supplier");
         return l;
     }
             

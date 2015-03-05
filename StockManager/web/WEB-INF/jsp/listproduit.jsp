@@ -32,6 +32,7 @@
             <thead>
                 <tr>
                     <th>Categorie</th>
+                    <th>Fournisseur</th>
                     <th>Id Produit</th>
                     <th>Nom</th>
                     <th>Description</th>
@@ -43,9 +44,10 @@
                 </tr>
             </thead>   
             <tbody>
-                <c:forEach items="${myList}" var="element"> 
+                <c:forEach items="${myListProduct}" var="element"> 
                     <tr>
                         <td>${element.category.nameCategory}</td>
+                        <td>${element.supplier.nameSupplier}</td>
                         <td>${element.idProduct}</td>
                         <td class="center">${element.nameProduct}</td>
                         <td class="center">${element.descriptifProduct}</td>
