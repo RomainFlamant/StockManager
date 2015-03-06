@@ -1,0 +1,369 @@
+Gestion des stocks
+
+Table =
+
+Produit  1,N
+         0,N  SousCategorie   1,1
+                              1,N   Categorie
+                              
+Utilisateur   1,N
+              0,N    Rôle
+              
+              
+Contexte : Société d'import export
+
+Produit -> categorie
+Client -> Pro
+       -> Particulier
+Fournisseur
+Employés --> utilisateur de l'application
+Commande
+FactureSupplier
+
+
+Objectif : outils qui gere ses stock
+commande et fournisseur
+des qu'un produit atteint un stock limite  declencher une alerte
+produit supérieur à une certain quantité __> alert
+nbr de comande
+chiffre d'affaire par catégorie et produit
+facture client et facture fournisseur.
+
+contrainte : 
+hibernate SpringMVC
+
+
+Script creation table
+
+
+///////////////////////////               OLD             ////////////////////////////////////////////////////////////////////////DROP TABLE IF EXISTS Product ; CREATE TABLE Product (IdProduct BIGINT  AUTO_INCREMENT NOT NULL, NameProduct TEXT, DescriptifProduct TEXT, PriceProduct FLOAT, MaxStockProduct INT, MinStockProduct INT, StockProduct INT, IdCategory BIGINT NOT NULL, IdSupplier BIGINT NOT NULL, PRIMARY KEY (IdProduct) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Category ; CREATE TABLE Category (IdCategory BIGINT  AUTO_INCREMENT NOT NULL, NameCategory TEXT, DescriptionCategory TEXT, PRIMARY KEY (IdCategory) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Customer ; CREATE TABLE Customer (IdCustomer BIGINT  AUTO_INCREMENT NOT NULL, NameCustomer BIGINT, SiretCustomer TEXT, TypeCustomer TEXT, AdressCustomer TEXT, VilleCustomer TEXT, CPCustomer BIGINT, PRIMARY KEY (IdCustomer) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Employee ; CREATE TABLE Employee (IdEmployee BIGINT  AUTO_INCREMENT NOT NULL, NameEmployee TEXT, FirstNameEmployee TEXT, EmailEmployee TEXT, MdpEmployee TEXT, IsActive INT, PRIMARY KEY (IdEmployee) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Supplier ; CREATE TABLE Supplier (IdSupplier BIGINT  AUTO_INCREMENT NOT NULL, NameSupplier TEXT, SiretSupplier TEXT, AddressSupplier TEXT, VilleSupplier TEXT, CPSupplier BIGINT, PRIMARY KEY (IdSupplier) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Orders ; CREATE TABLE Orders (NumOrder BIGINT  AUTO_INCREMENT NOT NULL, QuantityOrder BIGINT, DateOrders DATETIME, IdCustomer BIGINT NOT NULL, IdProduct BIGINT NOT NULL, IdEmployee BIGINT NOT NULL, PRIMARY KEY (NumOrder) ) ENGINE=InnoDB;  DROP TABLE IF EXISTS Invoice ; CREATE TABLE Invoice (NumInvoice BIGINT  AUTO_INCREMENT NOT NULL, QuantityInvoice BIGINT, DateInvoice DATETIME, IdProduct BIGINT NOT NULL, IdEmployee BIGINT NOT NULL, IdSupplier BIGINT NOT NULL, PRIMARY KEY (NumInvoice) ) ENGINE=InnoDB;  ALTER TABLE Product ADD CONSTRAINT FK_Product_IdCategory FOREIGN KEY (IdCategory) REFERENCES Category (IdCategory); ALTER TABLE Product ADD CONSTRAINT FK_Product_IdSupplier FOREIGN KEY (IdSupplier) REFERENCES Supplier (IdSupplier); ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdCustomer FOREIGN KEY (IdCustomer) REFERENCES Customer (IdCustomer); ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdProduct FOREIGN KEY (IdProduct) REFERENCES Product (IdProduct); ALTER TABLE Orders ADD CONSTRAINT FK_Orders_IdEmployee FOREIGN KEY (IdEmployee) REFERENCES Employee (IdEmployee); ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdProduct FOREIGN KEY (IdProduct) REFERENCES Product (IdProduct); ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdEmployee FOREIGN KEY (IdEmployee) REFERENCES Employee (IdEmployee); ALTER TABLE Invoice ADD CONSTRAINT FK_Invoice_IdSupplier FOREIGN KEY (IdSupplier) REFERENCES Supplier (IdSupplier); 
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.2.11
+-- http://www.phpmyadmin.net
+--
+-- Client :  127.0.0.1
+-- Généré le :  Jeu 05 Mars 2015 à 23:01
+-- Version du serveur :  5.6.21
+-- Version de PHP :  5.6.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `stockmanager2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `category`
+--
+
+CREATE TABLE IF NOT EXISTS `category` (
+`IdCategory` bigint(20) NOT NULL,
+  `NameCategory` text,
+  `DescriptionCategory` text
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `category`
+--
+
+INSERT INTO `category` (`IdCategory`, `NameCategory`, `DescriptionCategory`) VALUES
+(4, 'Plomberie', ''),
+(5, 'MaÃ§onerie', ''),
+(6, 'Verre', ''),
+(7, 'Electronic', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `customer`
+--
+
+CREATE TABLE IF NOT EXISTS `customer` (
+`IdCustomer` bigint(20) NOT NULL,
+  `NameCustomer` text,
+  `SiretCustomer` text,
+  `TypeCustomer` text,
+  `AdressCustomer` text,
+  `VilleCustomer` text,
+  `CPCustomer` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `customer`
+--
+
+INSERT INTO `customer` (`IdCustomer`, `NameCustomer`, `SiretCustomer`, `TypeCustomer`, `AdressCustomer`, `VilleCustomer`, `CPCustomer`) VALUES
+(3, 'Yaco', '3929 3927 392974', 'Pro', '84 avenue jean', 'Dueznse', 38954),
+(4, 'Hubert Jacque', '', 'Particulier', '135 rue keore', 'Rozman', 49310);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `employee`
+--
+
+CREATE TABLE IF NOT EXISTS `employee` (
+`IdEmployee` bigint(20) NOT NULL,
+  `NameEmployee` text,
+  `FirstNameEmployee` text,
+  `EmailEmployee` text,
+  `MdpEmployee` text,
+  `IsActive` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `employee`
+--
+
+INSERT INTO `employee` (`IdEmployee`, `NameEmployee`, `FirstNameEmployee`, `EmailEmployee`, `MdpEmployee`, `IsActive`) VALUES
+(3, 'Flamant', 'Romain', 'flamrom@gmail.com', 'roro', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `invoice`
+--
+
+CREATE TABLE IF NOT EXISTS `invoice` (
+`NumInvoice` bigint(20) NOT NULL,
+  `QuantityInvoice` bigint(20) DEFAULT NULL,
+  `DateInvoice` datetime DEFAULT NULL,
+  `IdEmployee` bigint(20) NOT NULL,
+  `IdSupplier` bigint(20) NOT NULL,
+  `IdProduct` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `invoice`
+--
+
+INSERT INTO `invoice` (`NumInvoice`, `QuantityInvoice`, `DateInvoice`, `IdEmployee`, `IdSupplier`, `IdProduct`) VALUES
+(5, 10, '2015-03-05 22:56:37', 3, 4, 4),
+(6, 150, '2015-03-05 23:00:47', 3, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `orderproduct`
+--
+
+CREATE TABLE IF NOT EXISTS `orderproduct` (
+`OrdP_id` bigint(20) NOT NULL,
+  `NumOrder` bigint(20) NOT NULL,
+  `IdProduct` bigint(20) NOT NULL,
+  `QuantityOrder` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `orderproduct`
+--
+
+INSERT INTO `orderproduct` (`OrdP_id`, `NumOrder`, `IdProduct`, `QuantityOrder`) VALUES
+(5, 19, 4, 2),
+(6, 20, 4, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `orders`
+--
+
+CREATE TABLE IF NOT EXISTS `orders` (
+`NumOrder` bigint(20) NOT NULL,
+  `DateOrders` datetime DEFAULT NULL,
+  `IdCustomer` bigint(20) NOT NULL,
+  `IdEmployee` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `orders`
+--
+
+INSERT INTO `orders` (`NumOrder`, `DateOrders`, `IdCustomer`, `IdEmployee`) VALUES
+(19, '2015-03-05 22:56:09', 4, 3),
+(20, '2015-03-05 22:58:16', 4, 3),
+(21, '2015-03-05 22:58:36', 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `product`
+--
+
+CREATE TABLE IF NOT EXISTS `product` (
+`IdProduct` bigint(20) NOT NULL,
+  `NameProduct` text,
+  `DescriptifProduct` text,
+  `PriceProduct` float DEFAULT NULL,
+  `MaxStockProduct` int(11) DEFAULT NULL,
+  `MinStockProduct` int(11) DEFAULT NULL,
+  `StockProduct` int(11) DEFAULT NULL,
+  `IdCategory` bigint(20) NOT NULL,
+  `IdSupplier` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `product`
+--
+
+INSERT INTO `product` (`IdProduct`, `NameProduct`, `DescriptifProduct`, `PriceProduct`, `MaxStockProduct`, `MinStockProduct`, `StockProduct`, `IdCategory`, `IdSupplier`) VALUES
+(3, 'Tuyau BA13', 'DiamÃ¨tre 15mm', 20, 300, 10, 350, 4, 4),
+(4, 'Plaque de verre', '3mm Ã©paisseur', 100, 20, 1, 3, 6, 5),
+(5, 'Disjoncteur', '', 20, 60, 10, 5, 7, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `supplier`
+--
+
+CREATE TABLE IF NOT EXISTS `supplier` (
+`IdSupplier` bigint(20) NOT NULL,
+  `NameSupplier` text,
+  `SiretSupplier` text,
+  `AddressSupplier` text,
+  `VilleSupplier` text,
+  `CPSupplier` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `supplier`
+--
+
+INSERT INTO `supplier` (`IdSupplier`, `NameSupplier`, `SiretSupplier`, `AddressSupplier`, `VilleSupplier`, `CPSupplier`) VALUES
+(4, 'AZe & Co', '2132 8938 3892', '13 rue solfre', 'Azerov', 40294),
+(5, 'RicoBrico', '2939 38492 838829', '05 rue linnÃ©', 'Paris', 75005);
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `category`
+--
+ALTER TABLE `category`
+ ADD PRIMARY KEY (`IdCategory`);
+
+--
+-- Index pour la table `customer`
+--
+ALTER TABLE `customer`
+ ADD PRIMARY KEY (`IdCustomer`);
+
+--
+-- Index pour la table `employee`
+--
+ALTER TABLE `employee`
+ ADD PRIMARY KEY (`IdEmployee`);
+
+--
+-- Index pour la table `invoice`
+--
+ALTER TABLE `invoice`
+ ADD PRIMARY KEY (`NumInvoice`), ADD KEY `FK_Invoice_IdEmployee` (`IdEmployee`), ADD KEY `FK_Invoice_IdSupplier` (`IdSupplier`), ADD KEY `FK_Invoice_IdProduct` (`IdProduct`);
+
+--
+-- Index pour la table `orderproduct`
+--
+ALTER TABLE `orderproduct`
+ ADD PRIMARY KEY (`OrdP_id`), ADD KEY `FK_OrderProduct_NumOrder` (`NumOrder`), ADD KEY `FK_OrderProduct_IdProduct` (`IdProduct`);
+
+--
+-- Index pour la table `orders`
+--
+ALTER TABLE `orders`
+ ADD PRIMARY KEY (`NumOrder`), ADD KEY `FK_Orders_IdCustomer` (`IdCustomer`), ADD KEY `FK_Orders_IdEmployee` (`IdEmployee`);
+
+--
+-- Index pour la table `product`
+--
+ALTER TABLE `product`
+ ADD PRIMARY KEY (`IdProduct`), ADD KEY `FK_Product_IdCategory` (`IdCategory`), ADD KEY `FK_Product_IdSupplier` (`IdSupplier`);
+
+--
+-- Index pour la table `supplier`
+--
+ALTER TABLE `supplier`
+ ADD PRIMARY KEY (`IdSupplier`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `category`
+--
+ALTER TABLE `category`
+MODIFY `IdCategory` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT pour la table `customer`
+--
+ALTER TABLE `customer`
+MODIFY `IdCustomer` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `employee`
+--
+ALTER TABLE `employee`
+MODIFY `IdEmployee` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `invoice`
+--
+ALTER TABLE `invoice`
+MODIFY `NumInvoice` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `orderproduct`
+--
+ALTER TABLE `orderproduct`
+MODIFY `OrdP_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `orders`
+--
+ALTER TABLE `orders`
+MODIFY `NumOrder` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT pour la table `product`
+--
+ALTER TABLE `product`
+MODIFY `IdProduct` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `supplier`
+--
+ALTER TABLE `supplier`
+MODIFY `IdSupplier` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `invoice`
+--
+ALTER TABLE `invoice`
+ADD CONSTRAINT `FK_Invoice_IdEmployee` FOREIGN KEY (`IdEmployee`) REFERENCES `employee` (`IdEmployee`),
+ADD CONSTRAINT `FK_Invoice_IdProduct` FOREIGN KEY (`IdProduct`) REFERENCES `product` (`IdProduct`),
+ADD CONSTRAINT `FK_Invoice_IdSupplier` FOREIGN KEY (`IdSupplier`) REFERENCES `supplier` (`IdSupplier`);
+
+--
+-- Contraintes pour la table `orderproduct`
+--
+ALTER TABLE `orderproduct`
+ADD CONSTRAINT `FK_OrderProduct_IdProduct` FOREIGN KEY (`IdProduct`) REFERENCES `product` (`IdProduct`),
+ADD CONSTRAINT `FK_OrderProduct_NumOrder` FOREIGN KEY (`NumOrder`) REFERENCES `orders` (`NumOrder`);
+
+--
+-- Contraintes pour la table `orders`
+--
+ALTER TABLE `orders`
+ADD CONSTRAINT `FK_Orders_IdCustomer` FOREIGN KEY (`IdCustomer`) REFERENCES `customer` (`IdCustomer`),
+ADD CONSTRAINT `FK_Orders_IdEmployee` FOREIGN KEY (`IdEmployee`) REFERENCES `employee` (`IdEmployee`);
+
+--
+-- Contraintes pour la table `product`
+--
+ALTER TABLE `product`
+ADD CONSTRAINT `FK_Product_IdCategory` FOREIGN KEY (`IdCategory`) REFERENCES `category` (`IdCategory`),
+ADD CONSTRAINT `FK_Product_IdSupplier` FOREIGN KEY (`IdSupplier`) REFERENCES `supplier` (`IdSupplier`);
